@@ -1,16 +1,16 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { createMock } from 'ts-auto-mock';
 
-import { User } from '../user/user.entity';
-import { AuthController } from './auth.controller';
-import { AuthService } from './auth.service';
+import { User } from '../../user/entities/user.entity';
+import { AuthController } from '../auth.controller';
+import { AuthService } from '../auth.service';
 
 describe('Auth Controller', () => {
   let controller: AuthController;
   let mockedAuthService: jest.Mocked<AuthService>;
   const user = createMock<Omit<User, 'password'>>({
-    name: 'John Doe',
-    email: 'john@doe.me',
+    name: 'Azizbek Berdimuratov',
+    phone: '+998912672434',
   }) as User;
 
   beforeEach(async () => {
@@ -36,14 +36,14 @@ describe('Auth Controller', () => {
 
   it('should register a new user', async () => {
     const register = {
-      name: 'John Doe',
-      email: 'john@doe.me',
+      name: 'Azizbek Berdimuratov',
+      phone: '+998912672434',
       password: 'Pa$$w0rd',
     };
 
     mockedAuthService.register.mockResolvedValue(
       createMock<Omit<User, 'password'>>({
-        email: register.email,
+        phone: register.phone,
         name: register.name,
       }) as User,
     );

@@ -8,7 +8,7 @@ import { Repository } from 'typeorm';
 
 import { Todo } from './todo.entity';
 import { TodoCreate } from './todo-create.dto';
-import { User } from '../user/user.entity';
+import { User } from '../user/entities/user.entity';
 import { TodoUpdate } from './todo-update.dto';
 
 @Injectable()

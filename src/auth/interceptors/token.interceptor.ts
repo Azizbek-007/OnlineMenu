@@ -8,7 +8,7 @@ import type { Response } from 'express';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import type { User } from '../../user/user.entity';
+import type { User } from '../../user/entities/user.entity';
 import { AuthService } from '../auth.service';
 
 @Injectable()
@@ -23,7 +23,7 @@ export class TokenInterceptor implements NestInterceptor {
       map(user => {
         const response = context.switchToHttp().getResponse<Response>();
         const token = this.authService.signToken(user);
-
+        console.log(token)
         response.setHeader('Authorization', `Bearer ${token}`);
         response.cookie('token', token, {
           httpOnly: true,

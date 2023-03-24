@@ -4,7 +4,12 @@ import {
   IsEmail,
   MinLength,
   Validate,
+  IsPhoneNumber,
+  IsEnum,
+  IsOptional,
+  IsNumber,
 } from 'class-validator';
+import { Role } from 'src/user/utils/role.enum';
 import { IsUserAlreadyExist } from '../../user/is-user-already-exist.validator';
 
 export class SignUp {
@@ -13,12 +18,26 @@ export class SignUp {
   readonly name: string;
 
   @IsDefined()
-  @IsEmail()
+  @IsPhoneNumber('UZ')
   @Validate(IsUserAlreadyExist)
-  readonly email: string;
+  readonly phone: string;
 
   @IsDefined()
   @IsNotEmpty()
   @MinLength(8)
   readonly password: string;
+
+  @IsNotEmpty()
+  @IsDefined()
+  @IsEnum(Role)
+  readonly role: Role;
+
+  @IsOptional()
+  @IsNumber()
+  readonly branche: number;
+
+  @IsOptional()
+  @IsNumber()
+  readonly company: number;
 }
+

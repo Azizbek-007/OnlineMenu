@@ -1,15 +1,17 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
-import { User } from '../user/user.entity';
+import { User } from '../user/entities/user.entity';
 import { SignUp } from './dto/sign-up.dto';
 import { JwtPayload } from './interfaces/jwt-payload.interface';
 import { UserService } from '../user/user.service';
+import { BrancheService } from 'src/branche/branche.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly userService: UserService,
+    private readonly brancheService: BrancheService,
     private readonly jwtService: JwtService,
   ) {}
 
@@ -20,20 +22,20 @@ export class AuthService {
     return user;
   }
 
-  async login(email: string, password: string): Promise<User> {
+  async login(phone: string, password: string): Promise<User> {
     let user: User;
 
     try {
-      user = await this.userService.findOne({ where: { email } });
+      user = await this.userService.findOne({ where: { phone } });
     } catch (err) {
       throw new UnauthorizedException(
-        `There isn't any user with email: ${email}`,
+        `There isn't any user with phone: ${phone}`,
       );
     }
 
     if (!(await user.checkPassword(password))) {
       throw new UnauthorizedException(
-        `Wrong password for user with email: ${email}`,
+        `Wrong password for user with phone: ${phone}`,
       );
     }
     delete user.password;
@@ -45,10 +47,11 @@ export class AuthService {
     let user: User;
 
     try {
-      user = await this.userService.findOne({ where: { email: payload.sub } });
+      user = await this.userService.findOne({ where: { phone: payload.sub } });
+
     } catch (error) {
       throw new UnauthorizedException(
-        `There isn't any user with email: ${payload.sub}`,
+        `There isn't any user with phone: ${payload.sub}`,
       );
     }
     delete user.password;
@@ -58,7 +61,8 @@ export class AuthService {
 
   signToken(user: User): string {
     const payload = {
-      sub: user.email,
+      sub: user.phone,
+      role: user.role
     };
 
     return this.jwtService.sign(payload);

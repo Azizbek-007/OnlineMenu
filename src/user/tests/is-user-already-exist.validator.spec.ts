@@ -4,15 +4,15 @@ import { useContainer, validate, Validate } from 'class-validator';
 import { createMock } from 'ts-auto-mock';
 import type { FindOptionsWhere, Repository } from 'typeorm';
 
-import { IsUserAlreadyExist } from './is-user-already-exist.validator';
-import { User } from './user.entity';
+import { IsUserAlreadyExist } from '../is-user-already-exist.validator';
+import { User } from '../entities/user.entity';
 
 class UserDTO {
   @Validate(IsUserAlreadyExist)
-  readonly email: string;
+  readonly phone: string;
 
-  constructor(email: string) {
-    this.email = email;
+  constructor(phone: string) {
+    this.phone = phone;
   }
 }
 
@@ -27,7 +27,7 @@ describe('IsUserAlreadyExist', () => {
             findOneBy: jest
               .fn()
               .mockImplementation((where: FindOptionsWhere<User>) => {
-                if (where.email === 'john@doe.me') {
+                if (where.phone === '+998912672434') {
                   return createMock<User>();
                 }
               }),
@@ -40,8 +40,8 @@ describe('IsUserAlreadyExist', () => {
   });
 
   it.each([
-    ['john@doe.me', 1],
-    ['newuser@example.com', 0],
+    ['+998912672434', 1],
+    ['+998999999999', 0],
   ])(
     'should validate whether the user already exist by their email',
     async (email, errors) => {

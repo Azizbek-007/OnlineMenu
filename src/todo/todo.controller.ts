@@ -19,8 +19,8 @@ import { TodoService } from './todo.service';
 import { JWTAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { SessionAuthGuard } from '../auth/guards/session-auth.guard';
 import { TodoCreate } from './todo-create.dto';
-import { AuthUser } from '../user/user.decorator';
-import { User } from '../user/user.entity';
+import { AuthUser } from '../user/decorators/user.decorator';
+import { User } from '../user/entities/user.entity';
 import { Todo } from './todo.entity';
 import { TodoUpdate } from './todo-update.dto';
 

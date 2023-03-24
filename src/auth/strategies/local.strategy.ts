@@ -3,18 +3,18 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-local';
 
 import { AuthService } from '../auth.service';
-import { User } from '../../user/user.entity';
+import { User } from '../../user/entities/user.entity';
 
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy, 'local') {
   constructor(private readonly authService: AuthService) {
     super({
-      usernameField: 'email',
+      usernameField: 'phone',
       passReqToCallback: false,
     });
   }
 
-  validate(email: string, password: string): Promise<User> {
-    return this.authService.login(email, password);
+  validate(phone: string, password: string): Promise<User> {
+    return this.authService.login(phone, password);
   }
 }

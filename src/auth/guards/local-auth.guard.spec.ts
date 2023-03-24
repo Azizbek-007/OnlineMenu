@@ -14,7 +14,7 @@ import * as session from 'express-session';
 import * as request from 'supertest';
 import { createMock } from 'ts-auto-mock';
 
-import type { User } from '../../user/user.entity';
+import type { User } from '../../user/entities/user.entity';
 import { AuthService } from '../auth.service';
 import { SessionSerializer } from '../session.serializer';
 import { LocalStrategy } from '../strategies/local.strategy';
@@ -68,15 +68,15 @@ describe('LocalAuthGuard', () => {
   it('should authenticate using email and password', async () => {
     mockedAuthService.login.mockResolvedValueOnce(
       createMock<User>({
-        email: 'john@doe.me',
+        phone: '+998912672434',
         id: 1,
-        name: 'John Doe ',
+        name: 'Azizbek Berdimuratov',
       }),
     );
 
     await request(app.getHttpServer())
       .post('/')
-      .send({ email: 'john@doe.me', password: 'Pa$$w0rd' })
+      .send({ phone: '+998912672434', password: 'Pa$$w0rd' })
       .expect(HttpStatus.OK)
       .expect(({ headers }) => {
         expect(headers['set-cookie'][0]).toEqual(

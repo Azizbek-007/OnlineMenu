@@ -3,7 +3,7 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { createMock } from 'ts-auto-mock';
 import type { Repository } from 'typeorm';
 
-import type { User } from '../user/user.entity';
+import type { User } from '../user/entities/user.entity';
 import type { TodoCreate } from './todo-create.dto';
 import type { TodoUpdate } from './todo-update.dto';
 import { Todo } from './todo.entity';

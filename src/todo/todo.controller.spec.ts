@@ -1,7 +1,7 @@
 import { Test, type TestingModule } from '@nestjs/testing';
 import { createMock } from 'ts-auto-mock';
 
-import type { User } from '../user/user.entity';
+import type { User } from '../user/entities/user.entity';
 import type { TodoCreate } from './todo-create.dto';
 import type { TodoUpdate } from './todo-update.dto';
 import { TodoController } from './todo.controller';
