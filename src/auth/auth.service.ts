@@ -5,13 +5,11 @@ import { User } from '../user/entities/user.entity';
 import { SignUp } from './dto/sign-up.dto';
 import { JwtPayload } from './interfaces/jwt-payload.interface';
 import { UserService } from '../user/user.service';
-import { BrancheService } from 'src/branche/branche.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly userService: UserService,
-    private readonly brancheService: BrancheService,
     private readonly jwtService: JwtService,
   ) {}
 

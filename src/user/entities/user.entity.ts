@@ -1,7 +1,6 @@
 import * as bcrypt from 'bcryptjs';
 import { Exclude } from 'class-transformer';
-import { Branche } from 'src/branche/entities/branche.entity';
-import { Company } from 'src/company/entities/company.entity';
+
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -10,17 +9,20 @@ import {
   UpdateDateColumn,
   BeforeInsert,
   BeforeUpdate,
-  ManyToOne,
+  BaseEntity,
 } from 'typeorm';
 import { Role } from '../utils/role.enum';
 
 @Entity()
-export class User {
+export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
   name: string;
+
+  @Column()
+  restoran_name: string;
 
   @Column({ unique: true })
   phone: string;
@@ -29,13 +31,6 @@ export class User {
   @Exclude()
   password: string;
 
-  @ManyToOne(type => Company, { nullable: true, createForeignKeyConstraints: false })
-  @Exclude()
-  company: Company | number;
-
-  @ManyToOne(type => Branche, (branche) => branche.employee, { nullable: true })
-  branche: Branche | number;
- 
   @Column({
     type: 'enum',
     enum: Role,
@@ -43,15 +38,12 @@ export class User {
   })
   role: Role;
 
-  @CreateDateColumn()
+  @CreateDateColumn() 
   createdAt: Date;
 
   @UpdateDateColumn()
   updatedAt: Date;
 
-  constructor(data: Partial<User> = {}) {
-    Object.assign(this, data);
-  }
 
   @BeforeInsert()
   @BeforeUpdate()

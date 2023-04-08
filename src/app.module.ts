@@ -6,9 +6,8 @@ import { dataSourceOptions } from './data-source';
 import { HealthController } from './health.controller';
 import { TodoModule } from './todo/todo.module';
 import { UserModule } from './user/user.module';
-import { CompanyModule } from './company/company.module';
-import { BrancheModule } from './branche/branche.module';
-import { CourseModule } from './course/course.module';
+import { CategoryModule } from './category/category.module';
+import { MenuModule } from './menu/menu.module';
 
 @Module({
   imports: [
@@ -17,9 +16,8 @@ import { CourseModule } from './course/course.module';
     UserModule,
     AuthModule,
     TodoModule,
-    CompanyModule,
-    BrancheModule,
-    CourseModule,
+    CategoryModule,
+    MenuModule
   ],
   controllers: [HealthController]
 })

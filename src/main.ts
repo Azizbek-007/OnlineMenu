@@ -5,7 +5,8 @@ import { setup } from './setup';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
-    snapshot: true
+    snapshot: true,
+    bodyParser: true
   });
 
   setup(app);
