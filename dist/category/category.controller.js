@@ -27,6 +27,9 @@ let CategoryController = class CategoryController {
     findAll() {
         return this.categoryService.findAll();
     }
+    findOne(id) {
+        return this.categoryService.findOne(id);
+    }
     update(id, updateCategoryDto) {
         return this.categoryService.update(+id, updateCategoryDto);
     }
@@ -47,6 +50,13 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], CategoryController.prototype, "findAll", null);
+__decorate([
+    (0, common_1.Get)(':id'),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", void 0)
+], CategoryController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),

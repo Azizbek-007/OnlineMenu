@@ -17,6 +17,10 @@ export class CategoryController {
     return this.categoryService.findAll();
   }
 
+  @Get(':id')
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.categoryService.findOne(id);
+  }
 
   @Patch(':id')
   update(@Param('id', ParseIntPipe) id: number, @Body() updateCategoryDto: UpdateCategoryDto) {

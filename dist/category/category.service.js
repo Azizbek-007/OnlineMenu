@@ -36,6 +36,19 @@ let CategoryService = class CategoryService {
         }
         return categories;
     }
+    async findOne(id) {
+        console.log('ok');
+        const category = await this.CategoryRepository.findOne({
+            relations: {
+                menu: true
+            },
+            where: { id }
+        });
+        if (!category) {
+            throw new common_1.NotFoundException(`There isn't any category with id: ${id}`);
+        }
+        return category;
+    }
     async update(id, updateCategoryDto) {
         const category = await this.CategoryRepository.findOneBy({ id });
         if (!category) {

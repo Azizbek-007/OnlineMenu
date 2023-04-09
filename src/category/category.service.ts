@@ -29,6 +29,21 @@ export class CategoryService {
     return categories;
   }
 
+  async findOne(id: number) {
+    console.log('ok')
+    const category = await this.CategoryRepository.findOne({ 
+      relations: {
+        menu: true
+      },
+      where: { id }
+    });
+
+    if (!category) {
+      throw new NotFoundException(`There isn't any category with id: ${id}`);
+    }
+    return category;
+  }
+
   async update(id: number, updateCategoryDto: UpdateCategoryDto) {
     const category = await this.CategoryRepository.findOneBy({ id });
 
