@@ -11,7 +11,9 @@ import { MenuModule } from './menu/menu.module';
 import { ConfigModule } from '@nestjs/config';
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      isGlobal: true
+    }),
     TypeOrmModule.forRoot({ ...dataSourceOptions, autoLoadEntities: true }),
     TerminusModule,
     UserModule,

@@ -23,7 +23,9 @@ let AppModule = class AppModule {
 AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            config_1.ConfigModule.forRoot(),
+            config_1.ConfigModule.forRoot({
+                isGlobal: true
+            }),
             typeorm_1.TypeOrmModule.forRoot(Object.assign(Object.assign({}, data_source_1.dataSourceOptions), { autoLoadEntities: true })),
             terminus_1.TerminusModule,
             user_module_1.UserModule,
