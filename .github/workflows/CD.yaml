@@ -21,7 +21,7 @@ jobs:
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.3.3
       with:
-        server: ${{ secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.PASSWORD }}   
+        server: "ftp.arzu.uz"
+        username: "backend@kvartirabar.uz"
+        password: "d%^E{kUdGdWa"
  
