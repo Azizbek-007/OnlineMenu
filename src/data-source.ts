@@ -6,6 +6,7 @@ import { Todo } from './todo/todo.entity';
 import { User } from './user/entities/user.entity';
 
 console.log(process.env)
+console.log(process.env.DB_PASSWORD)
 export const dataSourceOptions: DataSourceOptions = {
   type: 'mysql',
   host: process.env.DB_HOST,
