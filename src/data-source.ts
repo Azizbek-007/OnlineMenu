@@ -5,8 +5,12 @@ import { Menu } from './menu/entities/menu.entity';
 import { Todo } from './todo/todo.entity';
 import { User } from './user/entities/user.entity';
 
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 console.log(process.env)
 console.log(process.env.DB_PASSWORD)
+
 export const dataSourceOptions: DataSourceOptions = {
   type: 'mysql',
   host: process.env.DB_HOST,

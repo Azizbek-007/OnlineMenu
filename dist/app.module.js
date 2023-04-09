@@ -17,11 +17,13 @@ const todo_module_1 = require("./todo/todo.module");
 const user_module_1 = require("./user/user.module");
 const category_module_1 = require("./category/category.module");
 const menu_module_1 = require("./menu/menu.module");
+const config_1 = require("@nestjs/config");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
+            config_1.ConfigModule.forRoot(),
             typeorm_1.TypeOrmModule.forRoot(Object.assign(Object.assign({}, data_source_1.dataSourceOptions), { autoLoadEntities: true })),
             terminus_1.TerminusModule,
             user_module_1.UserModule,

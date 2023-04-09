@@ -6,6 +6,8 @@ const category_entity_1 = require("./category/entities/category.entity");
 const menu_entity_1 = require("./menu/entities/menu.entity");
 const todo_entity_1 = require("./todo/todo.entity");
 const user_entity_1 = require("./user/entities/user.entity");
+const dotenv = require("dotenv");
+dotenv.config();
 console.log(process.env);
 console.log(process.env.DB_PASSWORD);
 exports.dataSourceOptions = {

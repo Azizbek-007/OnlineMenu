@@ -8,9 +8,10 @@ import { TodoModule } from './todo/todo.module';
 import { UserModule } from './user/user.module';
 import { CategoryModule } from './category/category.module';
 import { MenuModule } from './menu/menu.module';
-
+import { ConfigModule } from '@nestjs/config';
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot({ ...dataSourceOptions, autoLoadEntities: true }),
     TerminusModule,
     UserModule,
