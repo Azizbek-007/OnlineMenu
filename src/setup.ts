@@ -17,6 +17,12 @@ export function setup(app: INestApplication): INestApplication {
     }),
   );
 
+  app.enableCors({
+    allowedHeaders: '*',
+    origin: '*',
+    credentials: true,
+  });
+
   app.use(cookieParser(process.env.APP_SECRET));
 
   // app.use(
