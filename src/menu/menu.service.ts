@@ -18,6 +18,10 @@ export class MenuService {
   }
 
   async search(data: string) {
+    if(data == ':search') {
+      const result = await this.MenuRepository.find();
+      return result
+    }
     const result = await this.MenuRepository.find({ 
       where: {
         name: Like("%" + data + "%")

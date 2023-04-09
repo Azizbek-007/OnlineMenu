@@ -26,6 +26,10 @@ let MenuService = class MenuService {
         return await this.MenuRepository.save(menu);
     }
     async search(data) {
+        if (data == ':search') {
+            const result = await this.MenuRepository.find();
+            return result;
+        }
         const result = await this.MenuRepository.find({
             where: {
                 name: (0, typeorm_2.Like)("%" + data + "%")
