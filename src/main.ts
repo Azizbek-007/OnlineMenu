@@ -6,7 +6,8 @@ import { setup } from './setup';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     snapshot: true,
-    bodyParser: true
+    bodyParser: true,
+    cors: true
   });
 
   setup(app);
