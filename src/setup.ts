@@ -17,13 +17,6 @@ export function setup(app: INestApplication): INestApplication {
     }),
   );
 
-  app.enableCors({
-    "origin": "*",
-    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-    "preflightContinue": false,
-    "optionsSuccessStatus": 204
-  });
-
   app.use(cookieParser(process.env.APP_SECRET));
 
   // app.use(

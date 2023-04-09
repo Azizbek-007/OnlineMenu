@@ -12,12 +12,6 @@ function setup(app) {
         whitelist: true,
         errorHttpStatusCode: common_1.HttpStatus.UNPROCESSABLE_ENTITY,
     }));
-    app.enableCors({
-        "origin": "*",
-        "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-        "preflightContinue": false,
-        "optionsSuccessStatus": 204
-    });
     app.use(cookieParser(process.env.APP_SECRET));
     app.use(passport.initialize());
     app.use(passport.session());
