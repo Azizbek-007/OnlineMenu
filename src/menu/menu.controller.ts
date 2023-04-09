@@ -16,7 +16,7 @@ export class MenuController {
     ) {}
 
   @Post()
-  @UseGuards(SessionAuthGuard, JWTAuthGuard)
+  // @UseGuards(SessionAuthGuard, JWTAuthGuard)
   @UseInterceptors(FileInterceptor('image', FileStorage))
   async create(
     @UploadedFile() file: Express.Multer.File,
@@ -35,7 +35,7 @@ export class MenuController {
   }
 
   @Patch(':id')
-  @UseGuards(SessionAuthGuard, JWTAuthGuard)
+  // @UseGuards(SessionAuthGuard, JWTAuthGuard)
   @UseInterceptors(FileInterceptor('image', FileStorage))
   async update(
     @Param('id', ParseIntPipe) id: number,
@@ -49,7 +49,7 @@ export class MenuController {
   }
 
   @Delete(':id')
-  @UseGuards(SessionAuthGuard, JWTAuthGuard)
+  // @UseGuards(SessionAuthGuard, JWTAuthGuard)
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.menuService.remove(id);
   }

@@ -10,7 +10,7 @@ export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
   @Post()
-  @UseGuards(SessionAuthGuard, JWTAuthGuard)
+  // @UseGuards(SessionAuthGuard, JWTAuthGuard)
   create(@Body() createCategoryDto: CreateCategoryDto) {
     return this.categoryService.create(createCategoryDto);
   }
@@ -26,13 +26,13 @@ export class CategoryController {
   }
 
   @Patch(':id')
-  @UseGuards(SessionAuthGuard, JWTAuthGuard)
+  // @UseGuards(SessionAuthGuard, JWTAuthGuard)
   update(@Param('id', ParseIntPipe) id: number, @Body() updateCategoryDto: UpdateCategoryDto) {
     return this.categoryService.update(+id, updateCategoryDto);
   }
 
   @Delete(':id')
-  @UseGuards(SessionAuthGuard, JWTAuthGuard)
+  // @UseGuards(SessionAuthGuard, JWTAuthGuard)
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.categoryService.remove(+id);
   }
