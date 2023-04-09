@@ -26,6 +26,11 @@ export class MenuController {
     return this.menuService.create(dto);
   }
 
+  @Get(':search')
+  search(@Param('search') data: string) {
+    return this.menuService.search(data)
+  }
+
   @Patch(':id')
   update(@Param('id', ParseIntPipe) id: number, @Body() updateMenuDto: UpdateMenuDto) {
     return this.menuService.update(id, updateMenuDto);

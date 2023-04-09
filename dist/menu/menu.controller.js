@@ -32,6 +32,9 @@ let MenuController = class MenuController {
         console.log(dto);
         return this.menuService.create(dto);
     }
+    search(data) {
+        return this.menuService.search(data);
+    }
     update(id, updateMenuDto) {
         return this.menuService.update(id, updateMenuDto);
     }
@@ -48,6 +51,13 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], MenuController.prototype, "create", null);
+__decorate([
+    (0, common_1.Get)(':search'),
+    __param(0, (0, common_1.Param)('search')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], MenuController.prototype, "search", null);
 __decorate([
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),

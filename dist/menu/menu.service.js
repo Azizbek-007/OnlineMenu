@@ -25,6 +25,14 @@ let MenuService = class MenuService {
         const menu = this.MenuRepository.create(createMenuDto);
         return await this.MenuRepository.save(menu);
     }
+    async search(data) {
+        const result = await this.MenuRepository.find({
+            where: {
+                name: (0, typeorm_2.Like)("%" + data + "%")
+            }
+        });
+        return result;
+    }
     async update(id, updateMenuDto) {
         const menu = await this.MenuRepository.findOneBy({ id });
         if (!menu) {

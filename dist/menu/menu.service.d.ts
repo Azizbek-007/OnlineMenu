@@ -6,6 +6,7 @@ export declare class MenuService {
     private readonly MenuRepository;
     constructor(MenuRepository: Repository<Menu>);
     create(createMenuDto: CreateMenuDto): Promise<Menu>;
+    search(data: string): Promise<Menu[]>;
     update(id: number, updateMenuDto: UpdateMenuDto): Promise<Menu>;
     remove(id: number): Promise<Menu>;
 }
