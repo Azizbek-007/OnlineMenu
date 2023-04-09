@@ -6,6 +6,7 @@ const category_entity_1 = require("./category/entities/category.entity");
 const menu_entity_1 = require("./menu/entities/menu.entity");
 const todo_entity_1 = require("./todo/todo.entity");
 const user_entity_1 = require("./user/entities/user.entity");
+console.log(process.env);
 exports.dataSourceOptions = {
     type: 'mysql',
     host: process.env.DB_HOST,

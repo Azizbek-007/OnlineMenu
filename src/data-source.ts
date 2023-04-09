@@ -5,6 +5,7 @@ import { Menu } from './menu/entities/menu.entity';
 import { Todo } from './todo/todo.entity';
 import { User } from './user/entities/user.entity';
 
+console.log(process.env)
 export const dataSourceOptions: DataSourceOptions = {
   type: 'mysql',
   host: process.env.DB_HOST,
