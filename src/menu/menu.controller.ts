@@ -31,10 +31,16 @@ export class MenuController {
     return this.menuService.search(data)
   }
 
-  @Patch(':id')
-  update(@Param('id', ParseIntPipe) id: number, @Body() updateMenuDto: UpdateMenuDto) {
-    return this.menuService.update(id, updateMenuDto);
-  }
+  // @Patch(':id')
+  // async update(
+  //   @Param('id', ParseIntPipe) id: number,
+  //   @UploadedFile() file: Express.Multer.File,  
+  //   @Body() dto: { image}) {
+  //     let aws_s3_location: string;
+  //     file ? (aws_s3_location = await this.FileUploadService.upload(file)) : null;
+  //     dto.avatar = aws_s3_location;
+  //     return this.menuService.update(id, updateMenuDto);
+  // }
 
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number) {

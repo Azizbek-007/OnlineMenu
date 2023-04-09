@@ -16,7 +16,6 @@ exports.MenuController = void 0;
 const common_1 = require("@nestjs/common");
 const platform_express_1 = require("@nestjs/platform-express");
 const menu_service_1 = require("./menu.service");
-const update_menu_dto_1 = require("./dto/update-menu.dto");
 const file_storage_1 = require("./file.storage");
 const s3_service_1 = require("./s3.service");
 let MenuController = class MenuController {
@@ -34,9 +33,6 @@ let MenuController = class MenuController {
     }
     search(data) {
         return this.menuService.search(data);
-    }
-    update(id, updateMenuDto) {
-        return this.menuService.update(id, updateMenuDto);
     }
     remove(id) {
         return this.menuService.remove(id);
@@ -58,14 +54,6 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], MenuController.prototype, "search", null);
-__decorate([
-    (0, common_1.Patch)(':id'),
-    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
-    __param(1, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, update_menu_dto_1.UpdateMenuDto]),
-    __metadata("design:returntype", void 0)
-], MenuController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
