@@ -1,4 +1,3 @@
-dist/
 megalinter-reports/
 *-result.html
 *-result.json
