@@ -28,6 +28,7 @@ let MenuController = class MenuController {
         let aws_s3_location;
         file ? (aws_s3_location = await this.FileUploadService.upload(file)) : null;
         dto.avatar = aws_s3_location;
+        console.log(aws_s3_location);
         console.log(dto);
         return this.menuService.create(dto);
     }

@@ -1,6 +1,7 @@
 import { S3 } from 'aws-sdk';
-import { Logger, Injectable } from '@nestjs/common';
-
+import { Injectable } from '@nestjs/common';
+import * as dotenv from 'dotenv';
+dotenv.config();
 @Injectable()
 export class FileUploadService {
   async upload(file) {

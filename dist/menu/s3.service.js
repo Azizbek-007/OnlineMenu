@@ -9,6 +9,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.FileUploadService = void 0;
 const aws_sdk_1 = require("aws-sdk");
 const common_1 = require("@nestjs/common");
+const dotenv = require("dotenv");
+dotenv.config();
 let FileUploadService = class FileUploadService {
     async upload(file) {
         const { originalname, mimetype } = file;
