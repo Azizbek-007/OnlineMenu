@@ -21,7 +21,7 @@ export class Menu extends BaseEntity{
     @Column({ nullable: true })
     sale: number;
 
-    @ManyToOne((type) => Category, (category) => category.menu)
+    @ManyToOne((type) => Category, (category) => category.menu, { createForeignKeyConstraints: false})
     category: Category;
 
     @CreateDateColumn() 

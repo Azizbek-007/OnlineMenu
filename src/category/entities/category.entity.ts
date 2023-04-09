@@ -9,7 +9,7 @@ export class Category extends BaseEntity{
     @Column()
     name: string
 
-    @OneToMany(type => Menu, menu => menu.category) 
+    @OneToMany(type => Menu, menu => menu.category, {'cascade': ['update', 'remove', 'insert']}) 
     menu: Menu[];  
 
     @CreateDateColumn() 

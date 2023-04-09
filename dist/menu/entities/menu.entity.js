@@ -39,7 +39,7 @@ __decorate([
     __metadata("design:type", Number)
 ], Menu.prototype, "sale", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)((type) => category_entity_1.Category, (category) => category.menu),
+    (0, typeorm_1.ManyToOne)((type) => category_entity_1.Category, (category) => category.menu, { createForeignKeyConstraints: false }),
     __metadata("design:type", category_entity_1.Category)
 ], Menu.prototype, "category", void 0);
 __decorate([

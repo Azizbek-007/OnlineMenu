@@ -34,6 +34,13 @@ let MenuController = class MenuController {
     search(data) {
         return this.menuService.search(data);
     }
+    async update(id, file, dto) {
+        let aws_s3_location;
+        file ? (aws_s3_location = await this.FileUploadService.upload(file)) : null;
+        dto.avatar = aws_s3_location;
+        console.log;
+        return this.menuService.update(id, dto);
+    }
     remove(id) {
         return this.menuService.remove(id);
     }
@@ -54,6 +61,16 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], MenuController.prototype, "search", null);
+__decorate([
+    (0, common_1.Patch)(':id'),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('image', file_storage_1.FileStorage)),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __param(1, (0, common_1.UploadedFile)()),
+    __param(2, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, Object, Object]),
+    __metadata("design:returntype", Promise)
+], MenuController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),

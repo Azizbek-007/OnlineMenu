@@ -23,7 +23,7 @@ __decorate([
     __metadata("design:type", String)
 ], Category.prototype, "name", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(type => menu_entity_1.Menu, menu => menu.category),
+    (0, typeorm_1.OneToMany)(type => menu_entity_1.Menu, menu => menu.category, { 'cascade': ['update', 'remove', 'insert'] }),
     __metadata("design:type", Array)
 ], Category.prototype, "menu", void 0);
 __decorate([
