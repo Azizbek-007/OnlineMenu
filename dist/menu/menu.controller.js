@@ -18,6 +18,8 @@ const platform_express_1 = require("@nestjs/platform-express");
 const menu_service_1 = require("./menu.service");
 const file_storage_1 = require("./file.storage");
 const s3_service_1 = require("./s3.service");
+const session_auth_guard_1 = require("../auth/guards/session-auth.guard");
+const jwt_auth_guard_1 = require("../auth/guards/jwt-auth.guard");
 let MenuController = class MenuController {
     constructor(menuService, FileUploadService) {
         this.menuService = menuService;
@@ -47,6 +49,7 @@ let MenuController = class MenuController {
 };
 __decorate([
     (0, common_1.Post)(),
+    (0, common_1.UseGuards)(session_auth_guard_1.SessionAuthGuard, jwt_auth_guard_1.JWTAuthGuard),
     (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('image', file_storage_1.FileStorage)),
     __param(0, (0, common_1.UploadedFile)()),
     __param(1, (0, common_1.Body)()),
@@ -63,6 +66,7 @@ __decorate([
 ], MenuController.prototype, "search", null);
 __decorate([
     (0, common_1.Patch)(':id'),
+    (0, common_1.UseGuards)(session_auth_guard_1.SessionAuthGuard, jwt_auth_guard_1.JWTAuthGuard),
     (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('image', file_storage_1.FileStorage)),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __param(1, (0, common_1.UploadedFile)()),
@@ -73,6 +77,7 @@ __decorate([
 ], MenuController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
+    (0, common_1.UseGuards)(session_auth_guard_1.SessionAuthGuard, jwt_auth_guard_1.JWTAuthGuard),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),

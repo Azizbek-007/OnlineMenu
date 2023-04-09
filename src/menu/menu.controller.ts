@@ -1,10 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, ParseIntPipe, UseGuards } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { MenuService } from './menu.service';
 import { CreateMenuDto } from './dto/create-menu.dto';
 import { UpdateMenuDto } from './dto/update-menu.dto';
 import { FileStorage } from './file.storage';
 import { FileUploadService } from './s3.service';
+import { SessionAuthGuard } from 'src/auth/guards/session-auth.guard';
+import { JWTAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @Controller('menu')
 export class MenuController {
@@ -14,6 +16,7 @@ export class MenuController {
     ) {}
 
   @Post()
+  @UseGuards(SessionAuthGuard, JWTAuthGuard)
   @UseInterceptors(FileInterceptor('image', FileStorage))
   async create(
     @UploadedFile() file: Express.Multer.File,
@@ -32,6 +35,7 @@ export class MenuController {
   }
 
   @Patch(':id')
+  @UseGuards(SessionAuthGuard, JWTAuthGuard)
   @UseInterceptors(FileInterceptor('image', FileStorage))
   async update(
     @Param('id', ParseIntPipe) id: number,
@@ -45,6 +49,7 @@ export class MenuController {
   }
 
   @Delete(':id')
+  @UseGuards(SessionAuthGuard, JWTAuthGuard)
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.menuService.remove(id);
   }
