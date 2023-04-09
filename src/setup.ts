@@ -18,9 +18,10 @@ export function setup(app: INestApplication): INestApplication {
   );
 
   app.enableCors({
-    allowedHeaders: '*',
-    origin: '*',
-    credentials: true,
+    "origin": "*",
+    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+    "preflightContinue": false,
+    "optionsSuccessStatus": 204
   });
 
   app.use(cookieParser(process.env.APP_SECRET));
@@ -51,6 +52,13 @@ export function setup(app: INestApplication): INestApplication {
   //   credentials: true,
   //   exposedHeaders: ['Authorization'],
   // });
+
+  app.enableCors({
+    "origin": "*",
+    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+    "preflightContinue": false,
+    "optionsSuccessStatus": 204
+  });
 
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
 
