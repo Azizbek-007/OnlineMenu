@@ -51,7 +51,7 @@ export function setup(app: INestApplication): INestApplication {
     "methods": "GET,OPTIONS,PATCH,DELETE,POST,PUT",
     "credentials": true,
     "exposedHeaders": ['Authorization'],
-    "allowedHeaders": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+    // "allowedHeaders": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
     "optionsSuccessStatus": 200
   });
 

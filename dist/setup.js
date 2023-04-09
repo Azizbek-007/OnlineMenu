@@ -36,7 +36,6 @@ function setup(app) {
         "methods": "GET,OPTIONS,PATCH,DELETE,POST,PUT",
         "credentials": true,
         "exposedHeaders": ['Authorization'],
-        "allowedHeaders": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
         "optionsSuccessStatus": 200
     });
     (0, class_validator_1.useContainer)(app.select(app_module_1.AppModule), { fallbackOnErrors: true });
