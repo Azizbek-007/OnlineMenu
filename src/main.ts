@@ -12,6 +12,7 @@ async function bootstrap() {
 
   setup(app);
 
+  app.enableCors();
   await app.listen(process.env.PORT || 3000);
 }
 bootstrap();
