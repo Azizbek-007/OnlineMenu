@@ -4,7 +4,9 @@ exports.setup = void 0;
 const common_1 = require("@nestjs/common");
 const class_validator_1 = require("class-validator");
 const cookieParser = require("cookie-parser");
+const session = require("express-session");
 const passport = require("passport");
+const connectPgSimple = require("connect-pg-simple");
 const app_module_1 = require("./app.module");
 function setup(app) {
     app.useGlobalPipes(new common_1.ValidationPipe({
@@ -13,6 +15,20 @@ function setup(app) {
         errorHttpStatusCode: common_1.HttpStatus.UNPROCESSABLE_ENTITY,
     }));
     app.use(cookieParser(process.env.APP_SECRET));
+    app.use(session({
+        secret: process.env.APP_SECRET,
+        resave: false,
+        saveUninitialized: false,
+        store: process.env.NODE_ENV === 'production'
+            ? new (connectPgSimple(session))()
+            : new session.MemoryStore(),
+        cookie: {
+            httpOnly: true,
+            signed: true,
+            sameSite: 'strict',
+            secure: process.env.NODE_ENV === 'production',
+        },
+    }));
     app.use(passport.initialize());
     app.use(passport.session());
     app.enableCors({
