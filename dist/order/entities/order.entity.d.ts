@@ -4,7 +4,7 @@ import { BaseEntity } from "typeorm";
 import { Status } from "../util/status.enum";
 export declare class Order extends BaseEntity {
     id: number;
-    member: Member[];
+    member: Member;
     adress: string;
     comment: string;
     products: Orderproduct;

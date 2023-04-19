@@ -33,7 +33,7 @@ let OrderService = class OrderService extends orderproducts_service_1.Orderprodu
             'adress': createOrderDto['address'],
             'comment': createOrderDto['comment'],
             'total_price': createOrderDto['total_price'],
-            'member': [user]
+            'member': user
         });
         const order_data = await this.OrderRepo.save(new_order);
         await Promise.all(createOrderDto['orders'].map(async (e) => {
@@ -54,7 +54,8 @@ let OrderService = class OrderService extends orderproducts_service_1.Orderprodu
             relations: {
                 products: {
                     menu: true
-                }
+                },
+                member: true
             },
             where: {
                 status: query['status']

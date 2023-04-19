@@ -21,8 +21,8 @@ __decorate([
     __metadata("design:type", Number)
 ], Order.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(type => member_entity_1.Member, member => member.order, { 'cascade': ['update', 'remove', 'insert'] }),
-    __metadata("design:type", Array)
+    (0, typeorm_1.ManyToOne)(type => member_entity_1.Member, member => member.order, { createForeignKeyConstraints: false }),
+    __metadata("design:type", member_entity_1.Member)
 ], Order.prototype, "member", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
