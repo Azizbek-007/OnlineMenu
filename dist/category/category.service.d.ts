@@ -7,7 +7,7 @@ export declare class CategoryService {
     constructor(CategoryRepository: Repository<Category>);
     create(createCategoryDto: CreateCategoryDto): Promise<Category>;
     findAll(): Promise<Category[]>;
-    findOne(id: number): Promise<Category>;
-    update(id: number, updateCategoryDto: UpdateCategoryDto): Promise<Category>;
-    remove(id: number): Promise<Category>;
+    findOne(id: number): Promise<any>;
+    update(id: number, updateCategoryDto: UpdateCategoryDto): Promise<any>;
+    remove(id: number): Promise<any>;
 }

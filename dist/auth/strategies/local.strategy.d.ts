@@ -1,7 +1,6 @@
-import { Strategy } from 'passport-local';
 import { AuthService } from '../auth.service';
 import { User } from '../../user/entities/user.entity';
-declare const LocalStrategy_base: new (...args: any[]) => Strategy;
+declare const LocalStrategy_base: any;
 export declare class LocalStrategy extends LocalStrategy_base {
     private readonly authService;
     constructor(authService: AuthService);

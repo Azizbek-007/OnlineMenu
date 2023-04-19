@@ -1,3 +1,3 @@
-import { DataSourceOptions, DataSource } from 'typeorm';
+import { DataSourceOptions } from 'typeorm';
 export declare const dataSourceOptions: DataSourceOptions;
-export declare const appDataSource: DataSource;
+export declare const appDataSource: any;

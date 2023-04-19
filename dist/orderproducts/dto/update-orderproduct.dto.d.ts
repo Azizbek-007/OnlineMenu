@@ -1,5 +1,4 @@
-import { CreateOrderproductDto } from './create-orderproduct.dto';
-declare const UpdateOrderproductDto_base: import("@nestjs/mapped-types").MappedType<Partial<CreateOrderproductDto>>;
+declare const UpdateOrderproductDto_base: any;
 export declare class UpdateOrderproductDto extends UpdateOrderproductDto_base {
 }
 export {};

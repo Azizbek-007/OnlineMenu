@@ -5,8 +5,8 @@ import { Menu } from './entities/menu.entity';
 export declare class MenuService {
     private readonly MenuRepository;
     constructor(MenuRepository: Repository<Menu>);
-    create(createMenuDto: CreateMenuDto): Promise<Menu>;
-    search(data: string): Promise<Menu[]>;
-    update(id: number, updateMenuDto: UpdateMenuDto): Promise<Menu>;
-    remove(id: number): Promise<Menu>;
+    create(createMenuDto: CreateMenuDto): Promise<any>;
+    search(data: string): Promise<any>;
+    update(id: number, updateMenuDto: UpdateMenuDto): Promise<any>;
+    remove(id: number): Promise<any>;
 }

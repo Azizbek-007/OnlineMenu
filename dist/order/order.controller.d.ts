@@ -5,12 +5,12 @@ import { StatusDto } from './dto/queryStatus.dto';
 export declare class OrderController {
     private readonly orderService;
     constructor(orderService: OrderService);
-    create(createOrderDto: CreateOrderDto): Promise<import("./entities/order.entity").Order>;
+    create(createOrderDto: CreateOrderDto): Promise<any>;
     findAll(query: StatusDto): Promise<{
-        data: import("./entities/order.entity").Order[];
-        count: number;
+        data: any;
+        count: any;
     }>;
     findOne(id: string): string;
-    update(id: number, updateOrderDto: UpdateOrderDto): Promise<import("./entities/order.entity").Order>;
+    update(id: number, updateOrderDto: UpdateOrderDto): Promise<any>;
     remove(id: string): string;
 }

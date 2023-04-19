@@ -11,16 +11,16 @@ export declare class OrderService extends OrderproductsService {
     private readonly OrderproductRepo;
     private readonly MemberRepo;
     constructor(OrderRepo: Repository<Order>, OrderproductRepo: Repository<Orderproduct>, MemberRepo: Repository<Member>);
-    create(createOrderDto: CreateOrderDto): Promise<Order>;
+    create(createOrderDto: CreateOrderDto): Promise<any>;
     findAll(query: {
         take: number;
         page: number;
         status: Status;
     }): Promise<{
-        data: Order[];
-        count: number;
+        data: any;
+        count: any;
     }>;
     findOne(id: number): string;
-    update(id: number, updateOrderDto: UpdateOrderDto): Promise<Order>;
+    update(id: number, updateOrderDto: UpdateOrderDto): Promise<any>;
     remove(id: number): string;
 }
