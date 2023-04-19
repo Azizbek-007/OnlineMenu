@@ -18,3 +18,4 @@ export class CreateOrderDto {
     @IsNumber()
     total_price: number;
 }
+ 

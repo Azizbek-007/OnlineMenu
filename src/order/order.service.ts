@@ -31,7 +31,7 @@ export class OrderService extends OrderproductsService{
       'adress': createOrderDto['address'],
       'comment': createOrderDto['comment'],
       'total_price': createOrderDto['total_price'],
-      'member': [user]
+      'member': user
     })
     const order_data = await this.OrderRepo.save(new_order)
 
@@ -55,7 +55,8 @@ export class OrderService extends OrderproductsService{
       relations: {
         products: {
           menu: true
-        }
+        },
+        member: true
       },
       where: {
         status: query['status']
