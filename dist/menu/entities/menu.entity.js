@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Menu = void 0;
 const category_entity_1 = require("../../category/entities/category.entity");
+const orderproduct_entity_1 = require("../../orderproducts/entities/orderproduct.entity");
 const typeorm_1 = require("typeorm");
 let Menu = class Menu extends typeorm_1.BaseEntity {
 };
@@ -43,6 +44,10 @@ __decorate([
     __metadata("design:type", category_entity_1.Category)
 ], Menu.prototype, "category", void 0);
 __decorate([
+    (0, typeorm_1.OneToMany)((type) => orderproduct_entity_1.Orderproduct, (product) => product.menu),
+    __metadata("design:type", orderproduct_entity_1.Orderproduct)
+], Menu.prototype, "product", void 0);
+__decorate([
     (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
 ], Menu.prototype, "createdAt", void 0);
@@ -50,6 +55,10 @@ __decorate([
     (0, typeorm_1.UpdateDateColumn)(),
     __metadata("design:type", Date)
 ], Menu.prototype, "updatedAt", void 0);
+__decorate([
+    (0, typeorm_1.DeleteDateColumn)(),
+    __metadata("design:type", Date)
+], Menu.prototype, "deletedAt", void 0);
 Menu = __decorate([
     (0, typeorm_1.Entity)()
 ], Menu);

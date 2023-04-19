@@ -32,7 +32,8 @@ let MenuService = class MenuService {
         }
         const result = await this.MenuRepository.find({
             where: {
-                name: (0, typeorm_2.Like)("%" + data + "%")
+                name: (0, typeorm_2.Like)("%" + data + "%"),
+                deletedAt: (0, typeorm_2.IsNull)()
             }
         });
         return result;

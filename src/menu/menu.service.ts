@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Like, Repository } from 'typeorm';
+import { IsNull, Like, Repository } from 'typeorm';
 import { CreateMenuDto } from './dto/create-menu.dto';
 import { UpdateMenuDto } from './dto/update-menu.dto';
 import { Menu } from './entities/menu.entity';
@@ -24,7 +24,8 @@ export class MenuService {
     }
     const result = await this.MenuRepository.find({ 
       where: {
-        name: Like("%" + data + "%")
+        name: Like("%" + data + "%"),
+        deletedAt: IsNull()
       }
     });
     return result;

@@ -13,11 +13,12 @@ const menu_controller_1 = require("./menu.controller");
 const typeorm_1 = require("@nestjs/typeorm");
 const menu_entity_1 = require("./entities/menu.entity");
 const s3_service_1 = require("./s3.service");
+const orderproduct_entity_1 = require("../orderproducts/entities/orderproduct.entity");
 let MenuModule = class MenuModule {
 };
 MenuModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([menu_entity_1.Menu])],
+        imports: [typeorm_1.TypeOrmModule.forFeature([menu_entity_1.Menu, orderproduct_entity_1.Orderproduct])],
         controllers: [menu_controller_1.MenuController],
         providers: [menu_service_1.MenuService, s3_service_1.FileUploadService]
     })

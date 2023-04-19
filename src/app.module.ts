@@ -9,6 +9,9 @@ import { UserModule } from './user/user.module';
 import { CategoryModule } from './category/category.module';
 import { MenuModule } from './menu/menu.module';
 import { ConfigModule } from '@nestjs/config';
+import { OrderModule } from './order/order.module';
+import { MemberModule } from './member/member.module';
+import { OrderproductsModule } from './orderproducts/orderproducts.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -20,7 +23,10 @@ import { ConfigModule } from '@nestjs/config';
     AuthModule,
     TodoModule,
     CategoryModule,
-    MenuModule
+    MenuModule,
+    OrderModule,
+    MemberModule,
+    OrderproductsModule
   ],
   controllers: [HealthController]
 })

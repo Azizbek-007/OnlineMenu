@@ -4,9 +4,10 @@ import { MenuController } from './menu.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Menu } from './entities/menu.entity';
 import { FileUploadService } from './s3.service';
+import { Orderproduct } from 'src/orderproducts/entities/orderproduct.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Menu])],
+  imports: [TypeOrmModule.forFeature([Menu, Orderproduct])],
   controllers: [MenuController],
   providers: [MenuService, FileUploadService]
 })

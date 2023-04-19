@@ -40,7 +40,7 @@ export class User extends BaseEntity {
 
   @CreateDateColumn() 
   createdAt: Date;
-
+ 
   @UpdateDateColumn()
   updatedAt: Date;
 
@@ -51,7 +51,7 @@ export class User extends BaseEntity {
     const salt = await bcrypt.genSalt();
     if (!/^\$2[abxy]?\$\d+\$/.test(this.password)) {
       this.password = await bcrypt.hash(this.password, salt);
-    }
+    } 
   }
 
   async checkPassword(plainPassword: string): Promise<boolean> {

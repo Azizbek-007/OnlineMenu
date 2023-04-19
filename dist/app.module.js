@@ -18,6 +18,9 @@ const user_module_1 = require("./user/user.module");
 const category_module_1 = require("./category/category.module");
 const menu_module_1 = require("./menu/menu.module");
 const config_1 = require("@nestjs/config");
+const order_module_1 = require("./order/order.module");
+const member_module_1 = require("./member/member.module");
+const orderproducts_module_1 = require("./orderproducts/orderproducts.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -32,7 +35,10 @@ AppModule = __decorate([
             auth_module_1.AuthModule,
             todo_module_1.TodoModule,
             category_module_1.CategoryModule,
-            menu_module_1.MenuModule
+            menu_module_1.MenuModule,
+            order_module_1.OrderModule,
+            member_module_1.MemberModule,
+            orderproducts_module_1.OrderproductsModule
         ],
         controllers: [health_controller_1.HealthController]
     })
