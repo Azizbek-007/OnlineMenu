@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Member } from 'src/member/entities/member.entity';
+import { Menu } from 'src/menu/entities/menu.entity';
 import { Orderproduct } from 'src/orderproducts/entities/orderproduct.entity';
 import { OrderproductsService } from 'src/orderproducts/orderproducts.service';
 import { Repository } from 'typeorm';
@@ -17,6 +18,9 @@ export class OrderService extends OrderproductsService{
 
     @InjectRepository(Orderproduct)
     private readonly OrderproductRepo: Repository<Orderproduct>,
+
+    @InjectRepository(Menu)
+    private readonly MenuRepo: Repository<Menu>,
 
     @InjectRepository(Member)
     private readonly MemberRepo: Repository<Member>,
@@ -35,8 +39,10 @@ export class OrderService extends OrderproductsService{
     })
     const order_data = await this.OrderRepo.save(new_order)
 
-    await Promise.all(createOrderDto['orders'].map( async (e) => {
-        const menu = await this.MemberRepo.findOneBy({ id: e['product_id'] })
+    await Promise.all
+    (createOrderDto['orders'].map( async (e) => {
+        const menu = await this.MenuRepo.findOneBy({ id: e['product_id'] })
+
         await this.createProduct({ 
           order: order_data,
           menu: menu,
