@@ -60,6 +60,9 @@ let OrderService = class OrderService extends orderproducts_service_1.Orderprodu
             where: {
                 status: query['status']
             },
+            order: {
+                id: "DESC"
+            },
             take,
             skip
         });
