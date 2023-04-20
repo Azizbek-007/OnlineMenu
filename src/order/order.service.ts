@@ -61,6 +61,9 @@ export class OrderService extends OrderproductsService{
       where: {
         status: query['status']
       },
+      order: {
+        id: "DESC"
+      },
       take,
       skip
     })
