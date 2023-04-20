@@ -12,6 +12,7 @@ import { ConfigModule } from '@nestjs/config';
 import { OrderModule } from './order/order.module';
 import { MemberModule } from './member/member.module';
 import { OrderproductsModule } from './orderproducts/orderproducts.module';
+import { StatisticsModule } from './statistics/statistics.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -26,7 +27,8 @@ import { OrderproductsModule } from './orderproducts/orderproducts.module';
     MenuModule,
     OrderModule,
     MemberModule,
-    OrderproductsModule
+    OrderproductsModule,
+    StatisticsModule
   ],
   controllers: [HealthController]
 })
