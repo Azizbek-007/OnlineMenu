@@ -21,6 +21,7 @@ const config_1 = require("@nestjs/config");
 const order_module_1 = require("./order/order.module");
 const member_module_1 = require("./member/member.module");
 const orderproducts_module_1 = require("./orderproducts/orderproducts.module");
+const statistics_module_1 = require("./statistics/statistics.module");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -38,7 +39,8 @@ AppModule = __decorate([
             menu_module_1.MenuModule,
             order_module_1.OrderModule,
             member_module_1.MemberModule,
-            orderproducts_module_1.OrderproductsModule
+            orderproducts_module_1.OrderproductsModule,
+            statistics_module_1.StatisticsModule
         ],
         controllers: [health_controller_1.HealthController]
     })
