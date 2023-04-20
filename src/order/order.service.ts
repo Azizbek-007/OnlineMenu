@@ -26,7 +26,7 @@ export class OrderService extends OrderproductsService{
   }
   async create(createOrderDto: CreateOrderDto) {
 
-    const user = await this.MemberRepo.findOneBy({ user_id: createOrderDto['user_id'] });
+    const user = await this.MemberRepo.findOneBy({ user_id: createOrderDto['member'] });
     const new_order = this.OrderRepo.create({
       'adress': createOrderDto['address'],
       'comment': createOrderDto['comment'],
