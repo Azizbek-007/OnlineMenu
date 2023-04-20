@@ -1,4 +1,5 @@
 import { Member } from 'src/member/entities/member.entity';
+import { Menu } from 'src/menu/entities/menu.entity';
 import { Orderproduct } from 'src/orderproducts/entities/orderproduct.entity';
 import { OrderproductsService } from 'src/orderproducts/orderproducts.service';
 import { Repository } from 'typeorm';
@@ -9,8 +10,9 @@ import { Status } from './util/status.enum';
 export declare class OrderService extends OrderproductsService {
     private readonly OrderRepo;
     private readonly OrderproductRepo;
+    private readonly MenuRepo;
     private readonly MemberRepo;
-    constructor(OrderRepo: Repository<Order>, OrderproductRepo: Repository<Orderproduct>, MemberRepo: Repository<Member>);
+    constructor(OrderRepo: Repository<Order>, OrderproductRepo: Repository<Orderproduct>, MenuRepo: Repository<Menu>, MemberRepo: Repository<Member>);
     create(createOrderDto: CreateOrderDto): Promise<Order>;
     findAll(query: {
         take: number;

@@ -16,15 +16,17 @@ exports.OrderService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const member_entity_1 = require("../member/entities/member.entity");
+const menu_entity_1 = require("../menu/entities/menu.entity");
 const orderproduct_entity_1 = require("../orderproducts/entities/orderproduct.entity");
 const orderproducts_service_1 = require("../orderproducts/orderproducts.service");
 const typeorm_2 = require("typeorm");
 const order_entity_1 = require("./entities/order.entity");
 let OrderService = class OrderService extends orderproducts_service_1.OrderproductsService {
-    constructor(OrderRepo, OrderproductRepo, MemberRepo) {
+    constructor(OrderRepo, OrderproductRepo, MenuRepo, MemberRepo) {
         super(OrderproductRepo);
         this.OrderRepo = OrderRepo;
         this.OrderproductRepo = OrderproductRepo;
+        this.MenuRepo = MenuRepo;
         this.MemberRepo = MemberRepo;
     }
     async create(createOrderDto) {
@@ -37,7 +39,7 @@ let OrderService = class OrderService extends orderproducts_service_1.Orderprodu
         });
         const order_data = await this.OrderRepo.save(new_order);
         await Promise.all(createOrderDto['orders'].map(async (e) => {
-            const menu = await this.MemberRepo.findOneBy({ id: e['product_id'] });
+            const menu = await this.MenuRepo.findOneBy({ id: e['product_id'] });
             await this.createProduct({
                 order: order_data,
                 menu: menu,
@@ -90,8 +92,10 @@ OrderService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(order_entity_1.Order)),
     __param(1, (0, typeorm_1.InjectRepository)(orderproduct_entity_1.Orderproduct)),
-    __param(2, (0, typeorm_1.InjectRepository)(member_entity_1.Member)),
+    __param(2, (0, typeorm_1.InjectRepository)(menu_entity_1.Menu)),
+    __param(3, (0, typeorm_1.InjectRepository)(member_entity_1.Member)),
     __metadata("design:paramtypes", [typeorm_2.Repository,
+        typeorm_2.Repository,
         typeorm_2.Repository,
         typeorm_2.Repository])
 ], OrderService);
