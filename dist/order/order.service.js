@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrderService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
+const axios_1 = require("axios");
 const member_entity_1 = require("../member/entities/member.entity");
 const menu_entity_1 = require("../menu/entities/menu.entity");
 const orderproduct_entity_1 = require("../orderproducts/entities/orderproduct.entity");
@@ -46,6 +47,7 @@ let OrderService = class OrderService extends orderproducts_service_1.Orderprodu
                 count: e['count']
             });
         }));
+        axios_1.default.get('https://bot.kvartirabar.uz/order/' + createOrderDto['member']);
         return order_data;
     }
     async findAll(query) {

@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import axios from 'axios';
 import { Member } from 'src/member/entities/member.entity';
 import { Menu } from 'src/menu/entities/menu.entity';
 import { Orderproduct } from 'src/orderproducts/entities/orderproduct.entity';
@@ -50,6 +51,7 @@ export class OrderService extends OrderproductsService{
         })
       })
     )
+    axios.get('https://bot.kvartirabar.uz/order/' + createOrderDto['member'])
     return order_data;
   }
 

@@ -1,10 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateOrderproductDto } from './dto/create-orderproduct.dto';
-import { UpdateOrderproductDto } from './dto/update-orderproduct.dto';
-import { Orderproduct } from './entities/orderproduct.entity';
-
+import { Orderproduct } from './entities/orderproduct.entity';;
 @Injectable()
 export class OrderproductsService {
   constructor (
@@ -18,7 +15,10 @@ export class OrderproductsService {
       menu: data['menu'],
       count: data['count']
     })
+    
     await this.OrderProductRepo.save(new_trans)
+
+    
   }
 
 }
