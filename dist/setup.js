@@ -7,6 +7,7 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const passport = require("passport");
 const connectPgSimple = require("connect-pg-simple");
+const compression = require("compression");
 const app_module_1 = require("./app.module");
 function setup(app) {
     app.useGlobalPipes(new common_1.ValidationPipe({
@@ -39,6 +40,7 @@ function setup(app) {
         "optionsSuccessStatus": 200
     });
     (0, class_validator_1.useContainer)(app.select(app_module_1.AppModule), { fallbackOnErrors: true });
+    app.use(compression());
     return app;
 }
 exports.setup = setup;

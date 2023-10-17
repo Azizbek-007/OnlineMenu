@@ -4,6 +4,7 @@ import * as cookieParser from 'cookie-parser';
 import * as session from 'express-session';
 import * as passport from 'passport';
 import * as connectPgSimple from 'connect-pg-simple';
+import * as compression from 'compression';
 
 import { AppModule } from './app.module';
 
@@ -56,6 +57,8 @@ export function setup(app: INestApplication): INestApplication {
   });
 
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
+  app.use(compression());
+
 
   return app;
 }
