@@ -11,4 +11,4 @@ import { Orderproduct } from 'src/orderproducts/entities/orderproduct.entity';
   controllers: [MenuController],
   providers: [MenuService, FileUploadService]
 })
-export class MenuModule {}
+export class MenuModule { }

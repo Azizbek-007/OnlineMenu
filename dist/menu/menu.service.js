@@ -28,7 +28,10 @@ let MenuService = class MenuService {
     async search(data) {
         if (data == ':search') {
             const result = await this.MenuRepository.find();
-            return result;
+            const responseData = result.map((item) => {
+                return Object.assign(Object.assign({}, item), { avatar: `http://localhost:3000/uploads/${item.avatar}` });
+            });
+            return responseData;
         }
         const result = await this.MenuRepository.find({
             where: {

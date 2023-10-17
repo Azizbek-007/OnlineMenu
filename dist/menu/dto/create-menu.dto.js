@@ -15,36 +15,26 @@ const category_entity_1 = require("../../category/entities/category.entity");
 class CreateMenuDto {
 }
 __decorate([
-    (0, class_validator_1.IsDefined)(),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateMenuDto.prototype, "name", void 0);
 __decorate([
-    (0, class_validator_1.IsDefined)(),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], CreateMenuDto.prototype, "descrcripton", void 0);
+], CreateMenuDto.prototype, "description", void 0);
 __decorate([
-    (0, class_validator_1.IsDefined)(),
-    (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], CreateMenuDto.prototype, "avatar", void 0);
-__decorate([
-    (0, class_validator_1.IsDefined)(),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateMenuDto.prototype, "price", void 0);
 __decorate([
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.IsNumberString)(),
     __metadata("design:type", Number)
 ], CreateMenuDto.prototype, "sale", void 0);
 __decorate([
-    (0, class_validator_1.IsNumber)(),
+    (0, class_validator_1.IsNumberString)(),
     __metadata("design:type", category_entity_1.Category)
 ], CreateMenuDto.prototype, "category", void 0);
 exports.CreateMenuDto = CreateMenuDto;

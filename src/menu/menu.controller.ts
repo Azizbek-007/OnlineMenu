@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, ParseIntPipe, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, ParseIntPipe, UseGuards, ParseFilePipe, MaxFileSizeValidator, FileTypeValidator } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { MenuService } from './menu.service';
 import { CreateMenuDto } from './dto/create-menu.dto';
@@ -7,24 +7,39 @@ import { FileStorage } from './file.storage';
 import { FileUploadService } from './s3.service';
 import { SessionAuthGuard } from 'src/auth/guards/session-auth.guard';
 import { JWTAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { diskStorage } from 'multer';
 
 @Controller('menu')
 export class MenuController {
   constructor(
     private readonly menuService: MenuService,
     private readonly FileUploadService: FileUploadService
-    ) {}
+  ) { }
 
   @Post()
   // @UseGuards(SessionAuthGuard, JWTAuthGuard)
-  @UseInterceptors(FileInterceptor('image', FileStorage))
+  @UseInterceptors(FileInterceptor('image', {
+    storage: diskStorage({
+      destination: './uploads',
+      filename: (req, file, cb) => {
+        const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('')
+        return cb(null, `${randomName}${file.originalname}`)
+      }
+    })
+  }))
   async create(
-    @UploadedFile() file: Express.Multer.File,
-    @Body() dto) {
-    let aws_s3_location: string;
-    file ? (aws_s3_location = await this.FileUploadService.upload(file)) : null;
-    dto.avatar = aws_s3_location;
-    console.log(aws_s3_location)
+    @UploadedFile(
+      new ParseFilePipe({
+        fileIsRequired: true,
+        validators: [
+          new MaxFileSizeValidator({ maxSize: 1024 * 1024 * 2 }),
+          new FileTypeValidator({ fileType: /(jpg|jpeg|png|gif)$/ }),
+        ]
+      })
+    ) file: Express.Multer.File,
+    @Body() dto: CreateMenuDto) {
+    console.log(file)
+    dto.avatar = file.filename;
     console.log(dto)
     return this.menuService.create(dto);
   }
@@ -39,13 +54,13 @@ export class MenuController {
   @UseInterceptors(FileInterceptor('image', FileStorage))
   async update(
     @Param('id', ParseIntPipe) id: number,
-    @UploadedFile() file: Express.Multer.File,  
+    @UploadedFile() file: Express.Multer.File,
     @Body() dto) {
-      let aws_s3_location: string;
-      file ? (aws_s3_location = await this.FileUploadService.upload(file)) : null;
-      dto.avatar = aws_s3_location;
-      console.log
-      return this.menuService.update(id, dto);
+    let aws_s3_location: string;
+    file ? (aws_s3_location = await this.FileUploadService.upload(file)) : null;
+    dto.avatar = aws_s3_location;
+    console.log
+    return this.menuService.update(id, dto);
   }
 
   @Delete(':id')

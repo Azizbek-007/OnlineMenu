@@ -1,31 +1,24 @@
-import { IsDefined, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator"
+import { IsNotEmpty, IsNumberString, IsString } from "class-validator"
 import { Category } from "src/category/entities/category.entity";
 
 export class CreateMenuDto {
-    @IsDefined()
-    @IsNotEmpty()
-    @IsString()
-    readonly name: string
+  @IsNotEmpty()
+  @IsString()
+  readonly name: string
 
-    @IsDefined()
-    @IsNotEmpty()
-    @IsString()
-    readonly descrcripton: string
+  @IsNotEmpty()
+  @IsString()
+  readonly description: string
 
-    @IsDefined()
-    @IsNotEmpty()
-    @IsString()
-    avatar: string;
+  avatar: string;
 
-    @IsDefined()
-    @IsNotEmpty()
-    @IsString()
-    readonly price: string;
+  @IsNotEmpty()
+  @IsString()
+  readonly price: string;
 
-    @IsOptional()
-    @IsNumber()
-    readonly sale: number;
+  @IsNumberString()
+  readonly sale: number;
 
-    @IsNumber()
-    readonly category: Category;
+  @IsNumberString()
+  readonly category: Category;
 }

@@ -20,9 +20,15 @@ export class MenuService {
   async search(data: string) {
     if(data == ':search') {
       const result = await this.MenuRepository.find();
-      return result
+      const responseData = result.map((item) => {
+        return {
+          ...item,
+          avatar: `http://localhost:3000/uploads/${item.avatar}`
+        }
+      })
+      return responseData;
     }
-    const result = await this.MenuRepository.find({ 
+    const result = await this.MenuRepository.find({
       where: {
         name: Like("%" + data + "%"),
         deletedAt: IsNull()

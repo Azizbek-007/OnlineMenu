@@ -7,13 +7,13 @@ import { Category } from './entities/category.entity';
 
 @Injectable()
 export class CategoryService {
-  constructor (
+  constructor(
     @InjectRepository(Category)
     private readonly CategoryRepository: Repository<Category>
-  ) {}
+  ) { }
 
   async create(createCategoryDto: CreateCategoryDto): Promise<Category> {
-    const category =  this.CategoryRepository.create(createCategoryDto)
+    const category = this.CategoryRepository.create(createCategoryDto)
     return await this.CategoryRepository.save(category);
   }
 
@@ -23,7 +23,7 @@ export class CategoryService {
         menu: true
       }
     });
-    if(categories.length == 0){
+    if (categories.length == 0) {
       throw new NotFoundException()
     }
     return categories;
@@ -31,7 +31,7 @@ export class CategoryService {
 
   async findOne(id: number) {
     console.log('ok')
-    const category = await this.CategoryRepository.findOne({ 
+    const category = await this.CategoryRepository.findOne({
       relations: {
         menu: true
       },

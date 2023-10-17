@@ -31,6 +31,7 @@
     "@nestjs/mapped-types": "^1.2.2",
     "@nestjs/passport": "^9.0.0",
     "@nestjs/platform-express": "^9.2.1",
+    "@nestjs/serve-static": "^4.0.0",
     "@nestjs/terminus": "^9.1.4",
     "@nestjs/typeorm": "^9.0.1",
     "aws-sdk": "^2.1353.0",

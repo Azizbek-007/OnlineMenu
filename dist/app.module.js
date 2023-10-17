@@ -22,11 +22,30 @@ const order_module_1 = require("./order/order.module");
 const member_module_1 = require("./member/member.module");
 const orderproducts_module_1 = require("./orderproducts/orderproducts.module");
 const statistics_module_1 = require("./statistics/statistics.module");
+const platform_express_1 = require("@nestjs/platform-express");
+const multer_1 = require("multer");
+const serve_static_1 = require("@nestjs/serve-static");
+const path_1 = require("path");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
+            platform_express_1.MulterModule.register({
+                storage: (0, multer_1.memoryStorage)(),
+                dest: './uploads',
+                limits: {
+                    fileSize: 1024 * 1024 * 2,
+                }
+            }),
+            serve_static_1.ServeStaticModule.forRoot({
+                rootPath: (0, path_1.join)(__dirname, '..', '/uploads'),
+                serveRoot: '/uploads',
+                serveStaticOptions: {
+                    cacheControl: true,
+                    immutable: true,
+                }
+            }),
             config_1.ConfigModule.forRoot({
                 isGlobal: true
             }),

@@ -13,8 +13,29 @@ import { OrderModule } from './order/order.module';
 import { MemberModule } from './member/member.module';
 import { OrderproductsModule } from './orderproducts/orderproducts.module';
 import { StatisticsModule } from './statistics/statistics.module';
+import { MulterModule } from '@nestjs/platform-express';
+import { memoryStorage } from 'multer';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 @Module({
   imports: [
+    MulterModule.register({
+      storage: memoryStorage(),
+      dest: './uploads',
+      limits: {
+        fileSize: 1024 * 1024 * 2,
+      }
+    }),
+
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', '/uploads'),
+      serveRoot: '/uploads',
+      serveStaticOptions: {
+        cacheControl: true,
+        immutable: true,
+      }
+    }),
+
     ConfigModule.forRoot({
       isGlobal: true
     }),
@@ -32,4 +53,4 @@ import { StatisticsModule } from './statistics/statistics.module';
   ],
   controllers: [HealthController]
 })
-export class AppModule {}
+export class AppModule { }

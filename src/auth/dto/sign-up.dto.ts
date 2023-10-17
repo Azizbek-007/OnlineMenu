@@ -5,7 +5,6 @@ import {
   Validate,
   IsPhoneNumber,
   IsEnum,
-  IsOptional,
   IsString,
 } from 'class-validator';
 import { Role } from 'src/user/utils/role.enum';
@@ -25,7 +24,6 @@ export class SignUp {
   @IsNotEmpty()
   @MinLength(8)
   readonly password: string;
-
 
   @IsDefined()
   @IsNotEmpty()
