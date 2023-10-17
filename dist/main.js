@@ -5,6 +5,7 @@ const app_module_1 = require("./app.module");
 const setup_1 = require("./setup");
 !(async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule, {
+        logger: ['error', 'warn', 'debug', 'verbose'],
         snapshot: true,
         bodyParser: true,
     });

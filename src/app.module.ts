@@ -4,7 +4,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { dataSourceOptions } from './data-source';
 import { HealthController } from './health.controller';
-import { TodoModule } from './todo/todo.module';
 import { UserModule } from './user/user.module';
 import { CategoryModule } from './category/category.module';
 import { MenuModule } from './menu/menu.module';
@@ -17,6 +16,7 @@ import { MulterModule } from '@nestjs/platform-express';
 import { memoryStorage } from 'multer';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+
 @Module({
   imports: [
     MulterModule.register({
@@ -39,11 +39,11 @@ import { join } from 'path';
     ConfigModule.forRoot({
       isGlobal: true
     }),
+
     TypeOrmModule.forRoot({ ...dataSourceOptions, autoLoadEntities: true }),
     TerminusModule,
     UserModule,
     AuthModule,
-    TodoModule,
     CategoryModule,
     MenuModule,
     OrderModule,

@@ -2,7 +2,6 @@ import { DataSourceOptions, DataSource } from 'typeorm';
 import { Category } from './category/entities/category.entity';
 import { Menu } from './menu/entities/menu.entity';
 
-import { Todo } from './todo/todo.entity';
 import { User } from './user/entities/user.entity';
 
 import * as dotenv from 'dotenv';
@@ -11,7 +10,6 @@ import { Member } from './member/entities/member.entity';
 import { Orderproduct } from './orderproducts/entities/orderproduct.entity';
 dotenv.config();
 
-console.log(process.env)
 console.log(process.env.DB_PASSWORD)
 
 export const dataSourceOptions: DataSourceOptions = {
@@ -21,17 +19,17 @@ export const dataSourceOptions: DataSourceOptions = {
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  entities: [User, Todo, Category, Menu, Member, Order, Orderproduct],
+  entities: [User, Category, Menu, Member, Order, Orderproduct],
   synchronize: true,
-  logging: true,
+  logging: false,
   extra: {
     ssl:
       process.env.SSL_MODE === 'require'
         ? {
-            rejectUnauthorized: false,
-          }
+          rejectUnauthorized: false,
+        }
         : false,
-  },  
+  },
 };
- 
+
 export const appDataSource = new DataSource(dataSourceOptions);

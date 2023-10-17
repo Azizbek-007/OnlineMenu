@@ -13,7 +13,6 @@ const typeorm_1 = require("@nestjs/typeorm");
 const auth_module_1 = require("./auth/auth.module");
 const data_source_1 = require("./data-source");
 const health_controller_1 = require("./health.controller");
-const todo_module_1 = require("./todo/todo.module");
 const user_module_1 = require("./user/user.module");
 const category_module_1 = require("./category/category.module");
 const menu_module_1 = require("./menu/menu.module");
@@ -53,7 +52,6 @@ AppModule = __decorate([
             terminus_1.TerminusModule,
             user_module_1.UserModule,
             auth_module_1.AuthModule,
-            todo_module_1.TodoModule,
             category_module_1.CategoryModule,
             menu_module_1.MenuModule,
             order_module_1.OrderModule,
