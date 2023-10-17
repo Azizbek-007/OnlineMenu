@@ -17,19 +17,21 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const menu_entity_1 = require("./entities/menu.entity");
+const data_source_1 = require("../data-source");
 let MenuService = class MenuService {
     constructor(MenuRepository) {
         this.MenuRepository = MenuRepository;
     }
     async create(createMenuDto) {
         const menu = this.MenuRepository.create(createMenuDto);
-        return await this.MenuRepository.save(menu);
+        const newMenu = await this.MenuRepository.save(menu);
+        return newMenu;
     }
     async search(data) {
         if (data == ':search') {
             const result = await this.MenuRepository.find();
             const responseData = result.map((item) => {
-                return Object.assign(Object.assign({}, item), { avatar: `http://localhost:3000/uploads/${item.avatar}` });
+                return Object.assign(Object.assign({}, item), { avatar: item.avatar ? `${data_source_1.baseUrl}/uploads/${item.avatar}` : null });
             });
             return responseData;
         }
@@ -39,7 +41,10 @@ let MenuService = class MenuService {
                 deletedAt: (0, typeorm_2.IsNull)()
             }
         });
-        return result;
+        const responseData = result.map((item) => {
+            return Object.assign(Object.assign({}, item), { avatar: item.avatar ? `${data_source_1.baseUrl}/uploads/${item.avatar}` : null });
+        });
+        return responseData;
     }
     async update(id, updateMenuDto) {
         const menu = await this.MenuRepository.findOneBy({ id });

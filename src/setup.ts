@@ -5,7 +5,6 @@ import * as session from 'express-session';
 import * as passport from 'passport';
 import * as connectPgSimple from 'connect-pg-simple';
 import * as compression from 'compression';
-
 import { AppModule } from './app.module';
 
 

@@ -4,26 +4,28 @@ import { IsNull, Like, Repository } from 'typeorm';
 import { CreateMenuDto } from './dto/create-menu.dto';
 import { UpdateMenuDto } from './dto/update-menu.dto';
 import { Menu } from './entities/menu.entity';
+import { baseUrl } from 'src/data-source';
 
 @Injectable()
 export class MenuService {
   constructor(
     @InjectRepository(Menu)
     private readonly MenuRepository: Repository<Menu>
-  ) {}
+  ) { }
 
   async create(createMenuDto: CreateMenuDto) {
-    const menu =  this.MenuRepository.create(createMenuDto)
-    return await this.MenuRepository.save(menu);
+    const menu = this.MenuRepository.create(createMenuDto)
+    const newMenu = await this.MenuRepository.save(menu);
+    return newMenu;
   }
 
   async search(data: string) {
-    if(data == ':search') {
+    if (data == ':search') {
       const result = await this.MenuRepository.find();
       const responseData = result.map((item) => {
         return {
           ...item,
-          avatar: `http://localhost:3000/uploads/${item.avatar}`
+          avatar: item.avatar ? `${baseUrl}/uploads/${item.avatar}` : null
         }
       })
       return responseData;
@@ -34,7 +36,13 @@ export class MenuService {
         deletedAt: IsNull()
       }
     });
-    return result;
+    const responseData = result.map((item) => {
+      return {
+        ...item,
+        avatar: item.avatar ? `${baseUrl}/uploads/${item.avatar}` : null
+      }
+    })
+    return responseData;
   }
 
   async update(id: number, updateMenuDto: UpdateMenuDto) {

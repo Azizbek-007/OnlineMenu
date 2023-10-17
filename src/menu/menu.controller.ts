@@ -38,9 +38,7 @@ export class MenuController {
       })
     ) file: Express.Multer.File,
     @Body() dto: CreateMenuDto) {
-    console.log(file)
     dto.avatar = file.filename;
-    console.log(dto)
     return this.menuService.create(dto);
   }
 
@@ -51,15 +49,28 @@ export class MenuController {
 
   @Patch(':id')
   // @UseGuards(SessionAuthGuard, JWTAuthGuard)
-  @UseInterceptors(FileInterceptor('image', FileStorage))
+  @UseInterceptors(FileInterceptor('image', {
+    storage: diskStorage({
+      destination: './uploads',
+      filename: (req, file, cb) => {
+        const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('')
+        return cb(null, `${randomName}${file.originalname}`)
+      }
+    })
+  }))
   async update(
     @Param('id', ParseIntPipe) id: number,
-    @UploadedFile() file: Express.Multer.File,
+    @UploadedFile(
+      new ParseFilePipe({
+        fileIsRequired: false,
+        validators: [
+          new MaxFileSizeValidator({ maxSize: 1024 * 1024 * 2 }),
+          new FileTypeValidator({ fileType: /(jpg|jpeg|png|gif)$/ }),
+        ]
+      })
+    ) file: Express.Multer.File,
     @Body() dto) {
-    let aws_s3_location: string;
-    file ? (aws_s3_location = await this.FileUploadService.upload(file)) : null;
-    dto.avatar = aws_s3_location;
-    console.log
+    dto.avatar = file?.filename;
     return this.menuService.update(id, dto);
   }
 

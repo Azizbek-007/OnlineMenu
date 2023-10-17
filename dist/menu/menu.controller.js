@@ -17,7 +17,6 @@ const common_1 = require("@nestjs/common");
 const platform_express_1 = require("@nestjs/platform-express");
 const menu_service_1 = require("./menu.service");
 const create_menu_dto_1 = require("./dto/create-menu.dto");
-const file_storage_1 = require("./file.storage");
 const s3_service_1 = require("./s3.service");
 const multer_1 = require("multer");
 let MenuController = class MenuController {
@@ -26,19 +25,14 @@ let MenuController = class MenuController {
         this.FileUploadService = FileUploadService;
     }
     async create(file, dto) {
-        console.log(file);
         dto.avatar = file.filename;
-        console.log(dto);
         return this.menuService.create(dto);
     }
     search(data) {
         return this.menuService.search(data);
     }
     async update(id, file, dto) {
-        let aws_s3_location;
-        file ? (aws_s3_location = await this.FileUploadService.upload(file)) : null;
-        dto.avatar = aws_s3_location;
-        console.log;
+        dto.avatar = file === null || file === void 0 ? void 0 : file.filename;
         return this.menuService.update(id, dto);
     }
     remove(id) {
@@ -77,9 +71,23 @@ __decorate([
 ], MenuController.prototype, "search", null);
 __decorate([
     (0, common_1.Patch)(':id'),
-    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('image', file_storage_1.FileStorage)),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('image', {
+        storage: (0, multer_1.diskStorage)({
+            destination: './uploads',
+            filename: (req, file, cb) => {
+                const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('');
+                return cb(null, `${randomName}${file.originalname}`);
+            }
+        })
+    })),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
-    __param(1, (0, common_1.UploadedFile)()),
+    __param(1, (0, common_1.UploadedFile)(new common_1.ParseFilePipe({
+        fileIsRequired: false,
+        validators: [
+            new common_1.MaxFileSizeValidator({ maxSize: 1024 * 1024 * 2 }),
+            new common_1.FileTypeValidator({ fileType: /(jpg|jpeg|png|gif)$/ }),
+        ]
+    }))),
     __param(2, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, Object, Object]),

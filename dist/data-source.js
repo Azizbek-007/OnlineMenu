@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.appDataSource = exports.dataSourceOptions = void 0;
+exports.appDataSource = exports.dataSourceOptions = exports.baseUrl = void 0;
 const typeorm_1 = require("typeorm");
 const category_entity_1 = require("./category/entities/category.entity");
 const menu_entity_1 = require("./menu/entities/menu.entity");
@@ -10,6 +10,7 @@ const order_entity_1 = require("./order/entities/order.entity");
 const member_entity_1 = require("./member/entities/member.entity");
 const orderproduct_entity_1 = require("./orderproducts/entities/orderproduct.entity");
 dotenv.config();
+exports.baseUrl = "http://kvartirabar.uz/";
 console.log(process.env.DB_PASSWORD);
 exports.dataSourceOptions = {
     type: 'mysql',
