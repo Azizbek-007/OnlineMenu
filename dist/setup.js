@@ -33,8 +33,8 @@ function setup(app) {
     }));
     app.use(passport.initialize());
     app.use(passport.session());
-    app.use(bodyParser.json({ limit: '50mb' }));
-    app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+    app.use(bodyParser.json({ limit: '2mb' }));
+    app.use(bodyParser.urlencoded({ limit: '2mb', extended: true }));
     app.enableCors({
         "origin": "*",
         "methods": "GET,OPTIONS,PATCH,DELETE,POST,PUT",
