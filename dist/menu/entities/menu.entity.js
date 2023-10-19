@@ -28,7 +28,9 @@ __decorate([
     __metadata("design:type", String)
 ], Menu.prototype, "description", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({
+        type: "string"
+    }),
     __metadata("design:type", String)
 ], Menu.prototype, "avatar", void 0);
 __decorate([
