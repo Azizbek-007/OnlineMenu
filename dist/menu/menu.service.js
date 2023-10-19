@@ -17,7 +17,6 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const menu_entity_1 = require("./entities/menu.entity");
-const data_source_1 = require("../data-source");
 let MenuService = class MenuService {
     constructor(MenuRepository) {
         this.MenuRepository = MenuRepository;
@@ -30,10 +29,7 @@ let MenuService = class MenuService {
     async search(data) {
         if (data == ':search') {
             const result = await this.MenuRepository.find();
-            const responseData = result.map((item) => {
-                return Object.assign(Object.assign({}, item), { avatar: item.avatar ? `${data_source_1.baseUrl}/uploads/${item.avatar}` : null });
-            });
-            return responseData;
+            return result;
         }
         const result = await this.MenuRepository.find({
             where: {
@@ -41,10 +37,7 @@ let MenuService = class MenuService {
                 deletedAt: (0, typeorm_2.IsNull)()
             }
         });
-        const responseData = result.map((item) => {
-            return Object.assign(Object.assign({}, item), { avatar: item.avatar ? `${data_source_1.baseUrl}/uploads/${item.avatar}` : null });
-        });
-        return responseData;
+        return result;
     }
     async update(id, updateMenuDto) {
         const menu = await this.MenuRepository.findOneBy({ id });
