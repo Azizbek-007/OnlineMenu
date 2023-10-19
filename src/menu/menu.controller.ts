@@ -40,7 +40,7 @@ export class MenuController {
     @Body() dto: CreateMenuDto) {
     console.log(dto)
     // dto.avatar = file.filename;
-    // return this.menuService.create(dto);
+    return this.menuService.create(dto);
   }
 
   @Get(':search')
