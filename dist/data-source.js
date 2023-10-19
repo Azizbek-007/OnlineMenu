@@ -10,7 +10,7 @@ const order_entity_1 = require("./order/entities/order.entity");
 const member_entity_1 = require("./member/entities/member.entity");
 const orderproduct_entity_1 = require("./orderproducts/entities/orderproduct.entity");
 dotenv.config();
-exports.baseUrl = "http://kvartirabar.uz/";
+exports.baseUrl = "http://kvartirabar.uz";
 console.log(process.env.DB_PASSWORD);
 exports.dataSourceOptions = {
     type: 'mysql',
