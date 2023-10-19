@@ -27,22 +27,22 @@ export class CategoryService {
     if (categories.length == 0) {
       throw new NotFoundException()
     }
-    const responseData = categories.map(category => {
-      return {
-        id: category.id,
-        name: category.name,
-        menu: category.menu.map(menu => {
-          return {
-            id: menu.id,
-            name: menu.name,
-            price: menu.price,
-            avatar: menu.avatar ? `${baseUrl}/uploads/${menu.avatar}` : null,
-            category: menu.category
-          }
-        })
-      }
-    })
-    return responseData;
+    // const responseData = categories.map(category => {
+    //   return {
+    //     id: category.id,
+    //     name: category.name,
+    //     menu: category.menu.map(menu => {
+    //       return {
+    //         id: menu.id,
+    //         name: menu.name,
+    //         price: menu.price,
+    //         avatar: menu.avatar ? `${baseUrl}/uploads/${menu.avatar}` : null,
+    //         category: menu.category
+    //       }
+    //     })
+    //   }
+    // })
+    return categories;
   }
 
   async findOne(id: number) {

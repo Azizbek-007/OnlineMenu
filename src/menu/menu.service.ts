@@ -22,13 +22,13 @@ export class MenuService {
   async search(data: string) {
     if (data == ':search') {
       const result = await this.MenuRepository.find();
-      const responseData = result.map((item) => {
-        return {
-          ...item,
-          avatar: item.avatar ? `${baseUrl}/uploads/${item.avatar}` : null
-        }
-      })
-      return responseData;
+      // const responseData = result.map((item) => {
+      //   return {
+      //     ...item,
+      //     avatar: item.avatar ? `${baseUrl}/uploads/${item.avatar}` : null
+      //   }
+      // })
+      return result;
     }
     const result = await this.MenuRepository.find({
       where: {
@@ -36,13 +36,13 @@ export class MenuService {
         deletedAt: IsNull()
       }
     });
-    const responseData = result.map((item) => {
-      return {
-        ...item,
-        avatar: item.avatar ? `${baseUrl}/uploads/${item.avatar}` : null
-      }
-    })
-    return responseData;
+    // const responseData = result.map((item) => {
+    //   return {
+    //     ...item,
+    //     avatar: item.avatar ? `${baseUrl}/uploads/${item.avatar}` : null
+    //   }
+    // })
+    return result;
   }
 
   async update(id: number, updateMenuDto: UpdateMenuDto) {
