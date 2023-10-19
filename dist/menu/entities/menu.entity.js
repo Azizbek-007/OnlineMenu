@@ -30,7 +30,7 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)({
         type: "varchar",
-        length: 20000,
+        length: 15000,
     }),
     __metadata("design:type", String)
 ], Menu.prototype, "avatar", void 0);

@@ -18,27 +18,28 @@ export class MenuController {
 
   @Post()
   // @UseGuards(SessionAuthGuard, JWTAuthGuard)
-  @UseInterceptors(FileInterceptor('image', {
-    storage: diskStorage({
-      destination: './uploads',
-      filename: (req, file, cb) => {
-        const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('')
-        return cb(null, `${randomName}${file.originalname}`)
-      }
-    })
-  }))
+  // @UseInterceptors(FileInterceptor('image', {
+  //   storage: diskStorage({
+  //     destination: './uploads',
+  //     filename: (req, file, cb) => {
+  //       const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('')
+  //       return cb(null, `${randomName}${file.originalname}`)
+  //     }
+  //   })
+  // }))
   async create(
-    @UploadedFile(
-      new ParseFilePipe({
-        fileIsRequired: true,
-        validators: [
-          new MaxFileSizeValidator({ maxSize: 1024 * 1024 * 2 }),
-          new FileTypeValidator({ fileType: /(jpg|jpeg|png|gif)$/ }),
-        ]
-      })
-    ) file: Express.Multer.File,
+    // @UploadedFile(
+    //   new ParseFilePipe({
+    //     fileIsRequired: true,
+    //     validators: [
+    //       new MaxFileSizeValidator({ maxSize: 1024 * 1024 * 2 }),
+    //       new FileTypeValidator({ fileType: /(jpg|jpeg|png|gif)$/ }),
+    //     ]
+    //   })
+    // ) file: Express.Multer.File,
     @Body() dto: CreateMenuDto) {
-    dto.avatar = file.filename;
+    console.log(dto)
+    // dto.avatar = file.filename;
     return this.menuService.create(dto);
   }
 
@@ -49,28 +50,27 @@ export class MenuController {
 
   @Patch(':id')
   // @UseGuards(SessionAuthGuard, JWTAuthGuard)
-  @UseInterceptors(FileInterceptor('image', {
-    storage: diskStorage({
-      destination: './uploads',
-      filename: (req, file, cb) => {
-        const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('')
-        return cb(null, `${randomName}${file.originalname}`)
-      }
-    })
-  }))
+  // @UseInterceptors(FileInterceptor('image', {
+  //   storage: diskStorage({
+  //     destination: './uploads',
+  //     filename: (req, file, cb) => {
+  //       const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('')
+  //       return cb(null, `${randomName}${file.originalname}`)
+  //     }
+  //   })
+  // }))
   async update(
     @Param('id', ParseIntPipe) id: number,
-    @UploadedFile(
-      new ParseFilePipe({
-        fileIsRequired: false,
-        validators: [
-          new MaxFileSizeValidator({ maxSize: 1024 * 1024 * 2 }),
-          new FileTypeValidator({ fileType: /(jpg|jpeg|png|gif)$/ }),
-        ]
-      })
-    ) file: Express.Multer.File,
-    @Body() dto) {
-    dto.avatar = file?.filename;
+    // @UploadedFile(
+    //   new ParseFilePipe({
+    //     fileIsRequired: false,
+    //     validators: [
+    //       new MaxFileSizeValidator({ maxSize: 1024 * 1024 * 2 }),
+    //       new FileTypeValidator({ fileType: /(jpg|jpeg|png|gif)$/ }),
+    //     ]
+    //   })
+    // ) file: Express.Multer.File,
+    @Body() dto: UpdateMenuDto) {
     return this.menuService.update(id, dto);
   }
 

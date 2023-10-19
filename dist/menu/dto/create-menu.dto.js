@@ -26,15 +26,20 @@ __decorate([
 ], CreateMenuDto.prototype, "description", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsBase64)(),
+    __metadata("design:type", String)
+], CreateMenuDto.prototype, "avatar", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsNumber)(),
     __metadata("design:type", String)
 ], CreateMenuDto.prototype, "price", void 0);
 __decorate([
-    (0, class_validator_1.IsNumberString)(),
+    (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], CreateMenuDto.prototype, "sale", void 0);
 __decorate([
-    (0, class_validator_1.IsNumberString)(),
+    (0, class_validator_1.IsNumber)(),
     __metadata("design:type", category_entity_1.Category)
 ], CreateMenuDto.prototype, "category", void 0);
 exports.CreateMenuDto = CreateMenuDto;

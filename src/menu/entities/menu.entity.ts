@@ -15,7 +15,7 @@ export class Menu extends BaseEntity {
 
   @Column({
     type: "varchar",
-    length: 20000,
+    length: 15000,
   })
   avatar: string;
 

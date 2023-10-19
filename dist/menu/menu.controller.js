@@ -14,25 +14,23 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MenuController = void 0;
 const common_1 = require("@nestjs/common");
-const platform_express_1 = require("@nestjs/platform-express");
 const menu_service_1 = require("./menu.service");
 const create_menu_dto_1 = require("./dto/create-menu.dto");
+const update_menu_dto_1 = require("./dto/update-menu.dto");
 const s3_service_1 = require("./s3.service");
-const multer_1 = require("multer");
 let MenuController = class MenuController {
     constructor(menuService, FileUploadService) {
         this.menuService = menuService;
         this.FileUploadService = FileUploadService;
     }
-    async create(file, dto) {
-        dto.avatar = file.filename;
+    async create(dto) {
+        console.log(dto);
         return this.menuService.create(dto);
     }
     search(data) {
         return this.menuService.search(data);
     }
-    async update(id, file, dto) {
-        dto.avatar = file === null || file === void 0 ? void 0 : file.filename;
+    async update(id, dto) {
         return this.menuService.update(id, dto);
     }
     remove(id) {
@@ -41,25 +39,9 @@ let MenuController = class MenuController {
 };
 __decorate([
     (0, common_1.Post)(),
-    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('image', {
-        storage: (0, multer_1.diskStorage)({
-            destination: './uploads',
-            filename: (req, file, cb) => {
-                const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('');
-                return cb(null, `${randomName}${file.originalname}`);
-            }
-        })
-    })),
-    __param(0, (0, common_1.UploadedFile)(new common_1.ParseFilePipe({
-        fileIsRequired: true,
-        validators: [
-            new common_1.MaxFileSizeValidator({ maxSize: 1024 * 1024 * 2 }),
-            new common_1.FileTypeValidator({ fileType: /(jpg|jpeg|png|gif)$/ }),
-        ]
-    }))),
-    __param(1, (0, common_1.Body)()),
+    __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, create_menu_dto_1.CreateMenuDto]),
+    __metadata("design:paramtypes", [create_menu_dto_1.CreateMenuDto]),
     __metadata("design:returntype", Promise)
 ], MenuController.prototype, "create", null);
 __decorate([
@@ -71,26 +53,10 @@ __decorate([
 ], MenuController.prototype, "search", null);
 __decorate([
     (0, common_1.Patch)(':id'),
-    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('image', {
-        storage: (0, multer_1.diskStorage)({
-            destination: './uploads',
-            filename: (req, file, cb) => {
-                const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('');
-                return cb(null, `${randomName}${file.originalname}`);
-            }
-        })
-    })),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
-    __param(1, (0, common_1.UploadedFile)(new common_1.ParseFilePipe({
-        fileIsRequired: false,
-        validators: [
-            new common_1.MaxFileSizeValidator({ maxSize: 1024 * 1024 * 2 }),
-            new common_1.FileTypeValidator({ fileType: /(jpg|jpeg|png|gif)$/ }),
-        ]
-    }))),
-    __param(2, (0, common_1.Body)()),
+    __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, Object, Object]),
+    __metadata("design:paramtypes", [Number, update_menu_dto_1.UpdateMenuDto]),
     __metadata("design:returntype", Promise)
 ], MenuController.prototype, "update", null);
 __decorate([
