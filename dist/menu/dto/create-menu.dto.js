@@ -26,7 +26,7 @@ __decorate([
 ], CreateMenuDto.prototype, "description", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsBase64)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateMenuDto.prototype, "avatar", void 0);
 __decorate([

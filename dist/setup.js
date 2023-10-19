@@ -9,6 +9,7 @@ const passport = require("passport");
 const connectPgSimple = require("connect-pg-simple");
 const compression = require("compression");
 const app_module_1 = require("./app.module");
+const bodyParser = require("body-parser");
 function setup(app) {
     app.useGlobalPipes(new common_1.ValidationPipe({
         transform: true,
@@ -32,6 +33,8 @@ function setup(app) {
     }));
     app.use(passport.initialize());
     app.use(passport.session());
+    app.use(bodyParser.json({ limit: '50mb' }));
+    app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
     app.enableCors({
         "origin": "*",
         "methods": "GET,OPTIONS,PATCH,DELETE,POST,PUT",

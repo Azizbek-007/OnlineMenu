@@ -11,7 +11,7 @@ export class CreateMenuDto {
   readonly description: string
 
   @IsNotEmpty()
-  @IsBase64()
+  @IsString()
   avatar: string;
 
   @IsNotEmpty()

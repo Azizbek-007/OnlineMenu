@@ -6,6 +6,7 @@ import * as passport from 'passport';
 import * as connectPgSimple from 'connect-pg-simple';
 import * as compression from 'compression';
 import { AppModule } from './app.module';
+import * as bodyParser from 'body-parser';
 
 
 export function setup(app: INestApplication): INestApplication {
@@ -39,6 +40,8 @@ export function setup(app: INestApplication): INestApplication {
 
   app.use(passport.initialize());
   app.use(passport.session());
+  app.use(bodyParser.json({limit: '50mb'}));
+  app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
   // app.enableCors({
   //   origin: process.env.ALLOWED_ORIGINS?.split(/\s*,\s*/) ?? '*',

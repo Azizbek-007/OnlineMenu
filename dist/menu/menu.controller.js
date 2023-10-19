@@ -25,7 +25,6 @@ let MenuController = class MenuController {
     }
     async create(dto) {
         console.log(dto);
-        return this.menuService.create(dto);
     }
     search(data) {
         return this.menuService.search(data);
