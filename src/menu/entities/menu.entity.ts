@@ -13,7 +13,9 @@ export class Menu extends BaseEntity{
     @Column()
     description: string;
 
-    @Column()
+    @Column({
+      type: "string"
+    })
     avatar: string;
 
     @Column()
@@ -28,9 +30,9 @@ export class Menu extends BaseEntity{
     @OneToMany((type) => Orderproduct, (product) => product.menu)
     product: Orderproduct
 
-    @CreateDateColumn() 
+    @CreateDateColumn()
     createdAt: Date;
-  
+
     @UpdateDateColumn()
     updatedAt: Date;
 
