@@ -10,7 +10,7 @@ import { Member } from './member/entities/member.entity';
 import { Orderproduct } from './orderproducts/entities/orderproduct.entity';
 dotenv.config();
 
-export const baseUrl = "http://kvartirabar.uz/";
+export const baseUrl = "http://kvartirabar.uz";
 
 console.log(process.env.DB_PASSWORD)
 
