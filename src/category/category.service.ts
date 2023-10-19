@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { Category } from './entities/category.entity';
+import { baseUrl } from 'src/data-source';
 
 @Injectable()
 export class CategoryService {
@@ -17,7 +18,7 @@ export class CategoryService {
     return await this.CategoryRepository.save(category);
   }
 
-  async findAll(): Promise<Category[]> {
+  async findAll() {
     const categories = await this.CategoryRepository.find({
       relations: {
         menu: true
@@ -26,7 +27,22 @@ export class CategoryService {
     if (categories.length == 0) {
       throw new NotFoundException()
     }
-    return categories;
+    const responseData = categories.map(category => {
+      return {
+        id: category.id,
+        name: category.name,
+        menu: category.menu.map(menu => {
+          return {
+            id: menu.id,
+            name: menu.name,
+            price: menu.price,
+            avatar: menu.avatar ? `${baseUrl}/uploads/${menu.avatar}` : null,
+            category: menu.category
+          }
+        })
+      }
+    })
+    return responseData;
   }
 
   async findOne(id: number) {

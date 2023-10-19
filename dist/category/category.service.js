@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const category_entity_1 = require("./entities/category.entity");
+const data_source_1 = require("../data-source");
 let CategoryService = class CategoryService {
     constructor(CategoryRepository) {
         this.CategoryRepository = CategoryRepository;
@@ -34,7 +35,22 @@ let CategoryService = class CategoryService {
         if (categories.length == 0) {
             throw new common_1.NotFoundException();
         }
-        return categories;
+        const responseData = categories.map(category => {
+            return {
+                id: category.id,
+                name: category.name,
+                menu: category.menu.map(menu => {
+                    return {
+                        id: menu.id,
+                        name: menu.name,
+                        price: menu.price,
+                        avatar: menu.avatar ? `${data_source_1.baseUrl}/uploads/${menu.avatar}` : null,
+                        category: menu.category
+                    };
+                })
+            };
+        });
+        return responseData;
     }
     async findOne(id) {
         console.log('ok');
