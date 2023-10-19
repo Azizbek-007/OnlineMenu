@@ -25,7 +25,7 @@ import { join } from 'path';
       limits: {
         fileSize: 1024 * 1024 * 2,
       }
-    }),
+    }), 
 
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'uploads'),

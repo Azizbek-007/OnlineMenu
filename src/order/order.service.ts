@@ -16,7 +16,7 @@ export class OrderService extends OrderproductsService{
   constructor(
     @InjectRepository(Order)
     private readonly OrderRepo: Repository<Order>,
-
+ 
     @InjectRepository(Orderproduct)
     private readonly OrderproductRepo: Repository<Orderproduct>,
 
@@ -44,7 +44,7 @@ export class OrderService extends OrderproductsService{
     (createOrderDto['orders'].map( async (e) => {
         const menu = await this.MenuRepo.findOneBy({ id: e['product_id'] })
 
-        await this.createProduct({ 
+        await this.createProduct({
           order: order_data,
           menu: menu,
           count: e['count']
