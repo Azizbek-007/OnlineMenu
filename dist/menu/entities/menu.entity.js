@@ -29,7 +29,8 @@ __decorate([
 ], Menu.prototype, "description", void 0);
 __decorate([
     (0, typeorm_1.Column)({
-        type: "string"
+        type: "varchar",
+        length: 20000,
     }),
     __metadata("design:type", String)
 ], Menu.prototype, "avatar", void 0);
