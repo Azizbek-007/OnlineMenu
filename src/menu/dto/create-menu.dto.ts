@@ -1,4 +1,4 @@
-import { IsBase64, IsNotEmpty, IsNumber, IsNumberString, IsString } from "class-validator"
+import { IsBase64, IsNotEmpty, IsNumber, IsNumberString, IsOptional, IsString } from "class-validator"
 import { Category } from "src/category/entities/category.entity";
 
 export class CreateMenuDto {
@@ -6,7 +6,7 @@ export class CreateMenuDto {
   @IsString()
   readonly name: string
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   readonly description: string
 
