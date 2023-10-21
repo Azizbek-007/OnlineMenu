@@ -18,6 +18,7 @@ const menu_service_1 = require("./menu.service");
 const create_menu_dto_1 = require("./dto/create-menu.dto");
 const update_menu_dto_1 = require("./dto/update-menu.dto");
 const s3_service_1 = require("./s3.service");
+const pogination_dto_1 = require("./dto/pogination.dto");
 let MenuController = class MenuController {
     constructor(menuService, FileUploadService) {
         this.menuService = menuService;
@@ -27,8 +28,8 @@ let MenuController = class MenuController {
         console.log(dto);
         return this.menuService.create(dto);
     }
-    search(data) {
-        return this.menuService.search(data);
+    search(data, query) {
+        return this.menuService.search(data, query);
     }
     async update(id, dto) {
         return this.menuService.update(id, dto);
@@ -47,8 +48,9 @@ __decorate([
 __decorate([
     (0, common_1.Get)(':search'),
     __param(0, (0, common_1.Param)('search')),
+    __param(1, (0, common_1.Query)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [String, pogination_dto_1.PoginationDto]),
     __metadata("design:returntype", void 0)
 ], MenuController.prototype, "search", null);
 __decorate([

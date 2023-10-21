@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, ParseIntPipe, UseGuards, ParseFilePipe, MaxFileSizeValidator, FileTypeValidator } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, ParseIntPipe, UseGuards, ParseFilePipe, MaxFileSizeValidator, FileTypeValidator, Query } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { MenuService } from './menu.service';
 import { CreateMenuDto } from './dto/create-menu.dto';
@@ -8,6 +8,7 @@ import { FileUploadService } from './s3.service';
 import { SessionAuthGuard } from 'src/auth/guards/session-auth.guard';
 import { JWTAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { diskStorage } from 'multer';
+import { PoginationDto } from './dto/pogination.dto';
 
 @Controller('menu')
 export class MenuController {
@@ -44,8 +45,8 @@ export class MenuController {
   }
 
   @Get(':search')
-  search(@Param('search') data: string) {
-    return this.menuService.search(data)
+  search(@Param('search') data: string, @Query() query: PoginationDto) {
+    return this.menuService.search(data, query)
   }
 
   @Patch(':id')

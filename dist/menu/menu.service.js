@@ -17,6 +17,8 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const menu_entity_1 = require("./entities/menu.entity");
+const DEFAULT_TAKE = 10;
+const DEFAULT_PAGE = 1;
 let MenuService = class MenuService {
     constructor(MenuRepository) {
         this.MenuRepository = MenuRepository;
@@ -26,16 +28,23 @@ let MenuService = class MenuService {
         const newMenu = await this.MenuRepository.save(menu);
         return newMenu;
     }
-    async search(data) {
+    async search(data, query) {
+        const { take = DEFAULT_TAKE, page = DEFAULT_PAGE } = query;
+        const skip = (page - 1) * take;
         if (data == ':search') {
-            const result = await this.MenuRepository.find();
+            const result = await this.MenuRepository.find({
+                take,
+                skip
+            });
             return result;
         }
         const result = await this.MenuRepository.find({
             where: {
                 name: (0, typeorm_2.Like)("%" + data + "%"),
                 deletedAt: (0, typeorm_2.IsNull)()
-            }
+            },
+            take,
+            skip
         });
         return result;
     }
